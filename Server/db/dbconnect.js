@@ -11,5 +11,4 @@ async function dbConnect() {
     throw error;
   }
 }
-
 export default dbConnect;
