@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
-import "dotenv/config";
-
+const mongoose=require("mongoose")
+const dotenv=require("dotenv")
+dotenv.config()
 const uri = process.env.MONG0_URI
 async function dbConnect() {
   try {
@@ -11,4 +11,4 @@ async function dbConnect() {
     throw error;
   }
 }
-export default dbConnect;
+module.exports={dbConnect}
