@@ -1,14 +1,7 @@
 import mongoose from "mongoose";
 
-const cartSchema = new mongoose.Schema({
-  userId: {
-    // type: mongoose.Schema.Types.ObjectId,
-    // ref: "User",
-    type: String,
-    required: true,
-  },
+const cartItemSchema = new mongoose.Schema({
   productId: {
-    // type: mongoose.Schema.Types.ObjectId,
     type: String,
     required: true,
   },
@@ -23,6 +16,17 @@ const cartSchema = new mongoose.Schema({
   checkoutTime: {
     type: Date,
     default: Date.now,
+  },
+});
+
+const cartSchema = new mongoose.Schema({
+  userId: {
+    type: String,
+    required: true,
+  },
+  cartItems: {
+    type: [cartItemSchema],
+    required: true,
   },
 });
 
