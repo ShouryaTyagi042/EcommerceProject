@@ -1,11 +1,15 @@
 import User from "../models/user.js";
 import { findUser } from "../services/user.js";
 import { genAuthToken } from "../utility/genToken.js";
+import { checkUser } from "../services/user.js";
+import { hashPassword } from "../utility/hashpass.js";
 export const createUser = async (req, res) => {
   try {
     console.log(req.body);
     const { name, email, password, address, mobile } = req.body;
-    const user = await User.create({ name, email, password, address, mobile });
+    if (await checkUser(email)) throw new Error("user already exists");
+    const pass = await hashPassword(password);
+    const user = await User.create({ name, email, password:pass, address, mobile });
     console.log(user);
     res.status(201).send({ user });
   } catch (error) {
@@ -15,10 +19,10 @@ export const createUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   try {
-      const { name, email, password } = req.body;
+      const {email, password } = req.body;
       const user = await findUser(email, password);
       console.log(user)
-      const token = genAuthToken(name, email);
+      const token = genAuthToken(user._id);
       console.log(user)
       res.status(200).send({ user, token })
   } catch (error) {
