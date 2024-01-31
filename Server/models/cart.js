@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-
+// include a bill/total amount section
+//include price section for each individual item added in the cart
 const cartItemsSchema = new mongoose.Schema({
   productId: {
     type: String,
