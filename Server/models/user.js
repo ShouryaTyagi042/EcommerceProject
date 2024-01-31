@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  balance:{
+    type:Number,
+    default:10000
+  },
   address: {
     type: String,
     required: true,
