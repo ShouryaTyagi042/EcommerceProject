@@ -30,3 +30,12 @@ export const loginUser = async (req, res) => {
   }
 }
 
+export const logoutUser = async (req, res) => {
+  try {
+      const msg = "Logout successful"
+      res.status(200).send(msg)
+  } catch (error) {
+      res.status(400).json({ error: error.message });
+  }
+}
+
