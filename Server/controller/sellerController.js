@@ -29,4 +29,12 @@ export const createSeller = async (req, res) => {
     }
   }
   
+  export const logoutSeller = async (req, res) => {
+    try {
+        const msg = "Logout successful"
+        res.status(200).send(msg)
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+  }
   
