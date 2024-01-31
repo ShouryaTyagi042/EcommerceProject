@@ -4,6 +4,7 @@ import express from "express";
 import userRoute from "./routes/userRoute.js";
 import sellerRoute from "./routes/sellerRoute.js"
 import productRoute from "./routes/productRoute.js";
+import orderRoute from "./routes/orderRoute.js"
 const app = express();
 const port = process.env.PORT;
 
@@ -11,7 +12,7 @@ app.use(express.json());
 app.use(userRoute);
 app.use(sellerRoute);
 app.use(productRoute);
-
+app.use(orderRoute)
 app.get("/", (req, res) => {
   res.send("Ecommerce API backend");
 });
