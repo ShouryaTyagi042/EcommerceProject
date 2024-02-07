@@ -2,7 +2,10 @@ import Cart from "../models/cart.js";
 import Product from "../models/product.js";
 
 export const addToCart = async (req,res) => {
-    try {
+    try 
+    {
+        if (!req.body.user.role.includes("user")) res.status(400).send("Only user can access this route");
+
         const user = req.body.user.email;
         const { productId , quantity} = req.body;
 
@@ -30,4 +33,60 @@ export const addToCart = async (req,res) => {
         res.status(400).json({ error: error.message });
     }
 }
+
+    export const getItems = async (req, res) => {
+        try {
+            if (!req.body.user.role.includes("user")) throw new Error("Only user can access this route");
+            const cart = await Cart.findOne({ userId: req.body.user.email });
+            const products = cart.cartItems; 
+
+            res.status(200).send({ products });
+        } 
+        catch (error) {
+            res.status(400).json({ error: error.message });
+        }
+    };
+    
+    export const deleteItem = async (req, res) => {
+        try 
+        {
+            if (!req.body.user.role.includes("user")) throw new Error("Only user can access this route");
+
+            const { productId } = req.body;
+            const cart = await Cart.findOne({ userId: req.body.user.email }); 
+
+            let productFound = false;
+            cart.cartItems.forEach((product) => { 
+                if (product.productId.toString() == productId) {
+                    productFound = true;
+                    //splice -> here the 1 means delete 1 element at the index of product
+                    cart.cartItems.splice(cart.cartItems.indexOf(product), 1); 
+                    cart.total -= product.price * product.quantity; 
+                }
+            });
+
+            if (!productFound) throw new Error("Product was not found");
+            await cart.save();
+            res.status(200).send("Product deleted from cart");
+        } 
+        catch (error) {
+            res.status(400).json({ error: error.message });
+        }
+    };
+    
+    export const emptyCart = async (req, res) => {
+        try 
+        {
+            if (!req.body.user.role.includes("user")) res.status(400).send("Only user can access this route");
+            const cart = await Cart.findOne({ userId: req.body.user.email }); 
+            cart.cartItems = []; 
+            cart.total = 0; 
+            await cart.save();
+            res.status(200).send("Emptied the cart");
+        } 
+        catch (error) {
+            res.status(400).send(error);
+        }
+    };
+
 
