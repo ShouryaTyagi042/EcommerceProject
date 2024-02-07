@@ -14,7 +14,9 @@ export const createUser = async (req, res) => {
     const pass = await hashPassword(password);
     const user = await User.create({ name, email, password:pass, address, mobile });
     
-    const userId = user._id;  //ftching the unique id of each user
+    //const userId = user._id;  //ftching the unique id of each user
+    //rather than id, we are using email
+    const userId = email;
     console.log(user);
     createCart(userId);
 

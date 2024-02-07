@@ -5,9 +5,9 @@ export const createNewProduct = async(req, res) =>
     {
         let reqBody = req.body;
         console.log(reqBody);
-        const {name, cost, quantity, sellerId } = reqBody;
+        const {name, price, quantity, sellerMail } = reqBody;
         
-        const product = await Product.create({name, cost, quantity, sellerId});
+        const product = await Product.create({name, price, quantity, sellerMail});
         console.log(product);
 
         res.status(201).send({product});

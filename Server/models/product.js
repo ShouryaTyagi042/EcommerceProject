@@ -5,7 +5,7 @@ const productSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-    cost: {
+    price: {
       type: Number,
       required: true,
     },
@@ -13,14 +13,19 @@ const productSchema = new mongoose.Schema({
       type: Number,
       required: true,
     },
-    sellerId: {
-        //got this type from ChatGPT, not sure which is correct
-        
-        // type: mongoose.Schema.Types.ObjectId,
-        //ref: 'Seller', // Assuming there is a User model for sellers
-      type: String,  
-      required: true,
+    sellerMail: {
+      type: String,
+      require: true,
     },
+
+    // Can replace sellerMail with sellerID in the future
+    // sellerId: {
+        // got this type from ChatGPT, not sure which is correct
+         // type: mongoose.Schema.Types.ObjectId,
+         //ref: 'Seller', // Assuming there is a User model for sellers
+    //   type: String,  
+    //   required: true,
+    // },
 });
 
 const Product = mongoose.model("Product", productSchema);
