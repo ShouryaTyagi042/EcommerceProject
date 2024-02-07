@@ -7,20 +7,24 @@ export const validate=async(req,res,next)=>{
         const password=req.body.password
         const emailparser=emailSchema.safeParse(email)
         const passwordparser=passwordSchema.safeParse(password)
+
+        // Bug : Even when the password was less than 6 digits, new user was being created
+        // Fix : returning the status incase of fails, to avoid calling next()
         if(!emailparser.success)
         {
-           res.status(401).json({
+           return res.status(401).json({
             msg:"Invalid email entered",
            })
         }
         if(!passwordparser.success)
         {
-            res.status(401).json({
+            return res.status(401).json({
                 msg:"password must be of 6 to 30 characters long",
                })
         }
-        next()
-    }catch (error) {
+        next();
+    }
+    catch (error) {
         res.status(401).json({ error: error.message });
     }
 }
