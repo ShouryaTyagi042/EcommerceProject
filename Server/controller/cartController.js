@@ -4,9 +4,7 @@ import Product from "../models/product.js";
 export const addToCart = async (req,res) => {
     try 
     {
-        if (!req.body.user.role.includes("user")) res.status(400).send("Only user can access this route");
-
-        const user = req.body.user.email;
+        const user = req.body.email;
         const { productId , quantity} = req.body;
 
         const cart = await Cart.findOne({ userId: user });
@@ -36,8 +34,7 @@ export const addToCart = async (req,res) => {
 
     export const getItems = async (req, res) => {
         try {
-            if (!req.body.user.role.includes("user")) throw new Error("Only user can access this route");
-            const cart = await Cart.findOne({ userId: req.body.user.email });
+            const cart = await Cart.findOne({ userId: req.body.email });
             const products = cart.cartItems; 
 
             res.status(200).send({ products });
@@ -50,10 +47,8 @@ export const addToCart = async (req,res) => {
     export const deleteItem = async (req, res) => {
         try 
         {
-            if (!req.body.user.role.includes("user")) throw new Error("Only user can access this route");
-
             const { productId } = req.body;
-            const cart = await Cart.findOne({ userId: req.body.user.email }); 
+            const cart = await Cart.findOne({ userId: req.body.email }); 
 
             let productFound = false;
             cart.cartItems.forEach((product) => { 
