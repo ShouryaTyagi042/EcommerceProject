@@ -6,6 +6,9 @@ import sellerRoute from "./routes/sellerRoute.js"
 import productRoute from "./routes/productRoute.js";
 import orderRoute from "./routes/orderRoute.js";
 import cartRoute from "./routes/cartRoute.js";
+import  { paymentSettled } from "./services/paymentSettled.js"
+
+
 const app = express();
 const port = process.env.PORT;
 
@@ -28,3 +31,5 @@ dbConnect()
   .catch((error) => {
     console.log(`Error connnecting to the database ${error}`);
   });
+
+  paymentSettled
