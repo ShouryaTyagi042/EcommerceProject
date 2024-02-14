@@ -29,8 +29,15 @@ export const cancelOrder = async (req, res) => {
         const order = await Order.findById(orderId);
         if (!order) throw new Error("order was not found");
         order.isCancelled = true;
-        await Order.findByIdAndDelete(orderId)
-        res.status(200).send("order cancelled")
+        if(order.paymentSettled!=true){
+            await Order.findByIdAndDelete(orderId)
+            res.status(200).send("order cancelled")
+        }
+        else{
+            //In case the payment is settled then the seller has to refund the money and then delete the order from the database
+        }
+        
+        
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
