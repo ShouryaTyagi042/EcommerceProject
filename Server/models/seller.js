@@ -25,6 +25,9 @@ const sellerSchema = new mongoose.Schema({
     mobile:{
         type:String,
         required:true
+    },
+    balance:{
+      type:Number
     }
   });
   
