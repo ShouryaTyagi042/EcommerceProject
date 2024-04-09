@@ -8,18 +8,17 @@ import { hashPassword } from "../utility/hashpass.js";
 export const createUser = async (req, res) => {
   try {
     console.log(req.body);
-    const { name, email, password, address, mobile } = req.body;
+    const { firstname,lastname,username,email, password,  phone } = req.body;
     
     if (await checkUser(email)) throw new Error("user already exists");
     const pass = await hashPassword(password);
-    const user = await User.create({ name, email, password:pass, address, mobile });
+    const user = await User.create({ firstname,lastname,username, email, password:pass, phone});
     
-    //const userId = user._id;  //ftching the unique id of each user
-    //rather than id, we are using email
+    // const userId = user._id;  //ftching the unique id of each user
+    // rather than id, we are using email
     const userId = email;
     console.log(user);
     createCart(userId);
-
     res.status(201).send({ user });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -44,8 +43,8 @@ export const createCart = async(userId) =>
 // =======
 export const loginUser = async (req, res) => {
   try {
-      const {email, password } = req.body;
-      const user = await findUser(email, password);
+      const {username, password } = req.body;
+      const user = await findUser(username, password);
       console.log(user)
       const token = genAuthToken(user._id);
       console.log(user)

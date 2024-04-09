@@ -1,22 +1,24 @@
 import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
-    name: {
-      type: String,
-      required: true,
+    id:{
+      type:String,
+      required:true,
+      unique:true,
     },
-    price: {
-      type: Number,
-      required: true,
-    },
-    quantity: {
-      type: Number,
-      required: true,
-    },
-    sellerMail: {
-      type: String,
-      require: true,
-    },
+    url:String,
+    detailural:String,
+    title:Object,
+    price:Object,
+    quantity:Number,
+    description:String,
+    discount:String,
+    tagline:String
+    
+    // sellerMail: {
+    //   type: String,
+    //   require: true,
+    // },
 
     // Can replace sellerMail with sellerID in the future
     // sellerId: {
