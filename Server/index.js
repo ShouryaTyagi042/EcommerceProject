@@ -7,11 +7,17 @@ import productRoute from "./routes/productRoute.js";
 import orderRoute from "./routes/orderRoute.js";
 import cartRoute from "./routes/cartRoute.js";
 import  { paymentSettled } from "./services/paymentSettled.js"
+import DefaultData from "./default.js";
+import cors from "cors"
+
+
 
 
 const app = express();
 const port = process.env.PORT;
 
+
+app.use(cors())
 app.use(express.json());
 app.use(userRoute);
 app.use(sellerRoute);
@@ -31,5 +37,7 @@ dbConnect()
   .catch((error) => {
     console.log(`Error connnecting to the database ${error}`);
   });
+
+  DefaultData()
 
   paymentSettled
