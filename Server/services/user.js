@@ -1,7 +1,7 @@
 import User from "../models/user.js";
 import { checkPass } from "../utility/hashpass.js";
-export const findUser = async (email, password) => {
-    const user = await User.findOne({ email })
+export const findUser = async (username, password) => {
+    const user = await User.findOne({ username:username })
     if (!user) {
         throw new Error('User does not exist')
     }
