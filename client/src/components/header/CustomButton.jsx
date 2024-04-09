@@ -1,5 +1,10 @@
 import { Box,Button, Typography,styled } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useState,useContext } from "react";
+import { DataContext } from "../../context/DataProvider";
+//component
+import LoginDialog from "../Login/LoginDialog";
+import Profile from "./Profile";
 
 const Wrapper=styled(Box)`
 display:flex;
@@ -13,7 +18,7 @@ margin:0 3% 0 auto;
     margin-right:40px;
     font-size:14px
 }
-align-item:center
+align-item:center;
 `
 
 const CartHandle=styled(Box)`
@@ -30,9 +35,18 @@ font-weight:650;
 `
 
 const CustomButton=()=>{
+    const [open,setOpen]=useState(false)
+
+    const {account,setAccount}=useContext(DataContext)
+    const openDialog=()=>{
+        setOpen(true);
+    }
     return (
         <Wrapper>
-            <LoginButton variant="contained">Login</LoginButton>
+            {
+                account ?<Profile account={account} setAccount={setAccount}/>:
+                <LoginButton variant="contained" onClick={()=>openDialog()}>Login</LoginButton>
+            }
 
             <Typography style={{marginTop:3,width:135}}>Become a Seller</Typography>
             <Typography style={{marginTop:3 }}>More</Typography>
@@ -40,6 +54,8 @@ const CustomButton=()=>{
                 <ShoppingCartIcon/>
                 <Typography>Cart</Typography>
             </CartHandle>
+            <LoginDialog open={open} setOpen={setOpen}/>
+            {/* passing open and setOpen which is the state varibale to the LoginDialog so that it opens only when the button is clicked */}
         </Wrapper>
     )
 }
