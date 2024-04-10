@@ -1,4 +1,19 @@
+import { response } from "express";
 import Product from "../models/product.js";
+
+export const getProducts=async(req,res)=>{
+    try{
+       const products= await Product.find({}); 
+       //to get all the data
+       res.status(200).json(products);
+    }catch(error){
+        res.status(500).json(error.message)
+    }
+}
+
+
+
+
 export const createNewProduct = async(req, res) => 
 {
     try
