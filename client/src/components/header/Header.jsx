@@ -4,7 +4,7 @@ import Search from './Search'
 import CustomButton from './CustomButton'
 
 const CustomHeader=styled(AppBar)`
-background:#2874f0;
+background: linear-gradient(to bottom, #114b96, #7b4092, #b33373, #cc4147, #c46710);
 height :55px;
 `
 const CustomBox=styled(Box)`

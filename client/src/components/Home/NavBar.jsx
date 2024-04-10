@@ -3,11 +3,15 @@ import { Box,Typography,styled } from "@mui/material";
 
 import { navData } from "../../constants/data";
 
-const ModifiedNavBar= styled(Box)`
-display:flex;
-margin:55px 130px 0px 130px;
-justify-content:space-between;
-`
+const ModifiedNavBar= styled(Box)(({theme})=>({
+display:'flex',
+margin:'55px 130px 0px 130px',
+justifyContent:'space-between',
+overflow:'overlay',
+[theme.breakpoints.down('lg')]:{
+    margin:0
+}
+}))
 const Conatiner=styled(Box)`
 padding:12px 8px;
 text-align:center;

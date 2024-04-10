@@ -2,11 +2,16 @@ import Carousel from "react-multi-carousel"
 import "react-multi-carousel/lib/styles.css";
 import { styled } from "@mui/material";
 import { bannerData } from "../../constants/data";
-
-const Image=styled('img')({
+import Slide from "./Slide";
+const Image=styled('img')(({theme})=>({
     width:'100%' ,
-    height:270
-})
+    height:270,
+    [theme.breakpoints.down('md')]:{
+      objectFit:'cover',
+      height:100
+    }
+    
+}))
 
 
 const responsive = {
@@ -47,7 +52,6 @@ const Banner=()=>{
                 <Image src={data.url} alt="banner" />
             ))
             }
-
         </Carousel>
         )
 }
