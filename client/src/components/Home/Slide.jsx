@@ -2,6 +2,8 @@ import Carousel from "react-multi-carousel"
 import "react-multi-carousel/lib/styles.css";
 import { Box, Typography,styled,Button } from "@mui/material";
 import Countdown from 'react-countdown';
+import { Link } from 'react-router-dom';
+
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 
 const responsive = {
@@ -88,12 +90,14 @@ const Slide=({ products,title ,timer})=>{
             >
                 {
                 products.map(product=>(
+                    <Link to = {`product/${product.id}`} style= {{ textDecoration : 'none'}}>
                     <Box textAlign="center" style={{padding:'25px 15px'}}>
                         <Image src={product.url} alt="products"/>
                         <Typography style={{fontWeight:600}}>{product.title.shortTitle}</Typography>
                         <Text style={{color:'#21a675'}}>{product.discount}</Text>
                         <Text style={{opacity:'.6'} }>{product.tagline}</Text>
                     </Box>
+                    </Link>
                     
                 ))
                 }
