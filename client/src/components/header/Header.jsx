@@ -1,4 +1,5 @@
 import {AppBar,Toolbar,Box,styled,Typography} from '@mui/material'
+import { Link } from 'react-router-dom'
 //componenets
 import Search from './Search'
 import CustomButton from './CustomButton'
@@ -15,6 +16,11 @@ const SubHeading=styled(Typography)`
 font-size:10px;
 font-style:italic`
 
+const Component = styled(Link)`
+font-size: 10px,
+font-style: italics;
+`
+
 const PlusImg=styled('img')({
     width:10,
     height:10,
@@ -27,17 +33,21 @@ const PlusImg=styled('img')({
 
 const Header=()=>{
 
-
+    
     return (
-        <div>
+        // <StyledHeader>
+        //     <Toolbar style={{ minHeight: 55}}></Toolbar>
             <CustomHeader>
             <Toolbar style={{minHeight:55}}>
-                {/* <CustomBox>   */}
+                <Component to= '/'>
+            <img src='./vader.svg' style={ {width: 55}} />
+                {/* <CustomBox>   
                     {/* replacement of div. It is basically a wrapper components */}
-                    {/* <Box style={{display:'flex'}}> */}
+                    {/* <Box style={{display:'flex'}}>
                        
-                    {/* </Box> */}
+                    </Box> */}
                 {/* </CustomBox> */}
+                </Component> 
                 <Search/>
                 <Box>
                 <CustomButton/>
@@ -45,7 +55,7 @@ const Header=()=>{
                 
             </Toolbar>
             </CustomHeader>
-        </div>
+        // </StyledHeader>
     )
 }
 export default Header;
