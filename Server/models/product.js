@@ -13,7 +13,16 @@ const productSchema = new mongoose.Schema({
     quantity:Number,
     description:String,
     discount:String,
-    tagline:String
+    tagline:String,
+
+    seller:{
+      type: String,
+      default: "Jesus",
+    },
+    warranty:{
+      type: String,
+      default: "1 Year",
+    },
     
     // sellerMail: {
     //   type: String,
