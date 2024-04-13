@@ -6,10 +6,13 @@ export const getProducts=async(req,res)=>{
        const products= await Product.find({}); 
        //to get all the data
        res.status(200).json(products);
-    }catch(error){
+    }
+    catch(error){
         res.status(500).json(error.message)
     }
 }
+
+
 
 
 
@@ -32,3 +35,16 @@ export const createNewProduct = async(req, res) =>
         res.status(400).json({error: error.message});
     }
 };
+
+export const getProductsById = async(req, res) =>{
+    try{
+        const id = req.params.id;
+        // console.log(id);
+        const product = await Product.findOne({ 'id' : id })
+        
+        res.status(200).json(product);
+    }catch(error){
+        res.status(500).json({ message : error.message })
+        console.log(error.message);
+    }
+}
