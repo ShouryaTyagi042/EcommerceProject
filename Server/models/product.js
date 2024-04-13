@@ -21,7 +21,7 @@ const productSchema = new mongoose.Schema({
     },
     warranty:{
       type: String,
-      default: "1 Year",
+      default: "Not mentioned",
     },
     
     // sellerMail: {
