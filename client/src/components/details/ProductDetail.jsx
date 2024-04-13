@@ -77,11 +77,15 @@ export default function ProductDetail({ product }) {
         </TableRow>
         <TableRow>
             <TableCell style={{ color: '#8585ad', fontFamily: 'Monospace' }}>Warranty</TableCell>
-            <TableCell>1 Year warranty</TableCell>
+            <TableCell>
+                {product.warranty === "Not mentioned" && product.price.cost > 1300 
+                    ? <b>1 Year warranty</b>
+                    : <b>{ product.warranty }</b>}
+            </TableCell>
         </TableRow>
         <TableRow>
       <TableCell style={{ color: '#8585ad', fontFamily: 'Monospace' }}>Seller</TableCell>
-      <TableCell>{product.seller}</TableCell>
+      <TableCell><b>{product.seller}</b></TableCell>
     </TableRow>
     </TableBody>
 </Table>
