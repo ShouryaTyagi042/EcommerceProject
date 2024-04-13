@@ -6,6 +6,7 @@ import { getProductDetails } from '../../redux/actions/productAction'
 import { Box,styled,Grid, Typography } from "@mui/material"
 
 import ActionItem from './ActionItem'
+import ProductDetail from './ProductDetail'
 
 const Component = styled(Box)`
   margin-top: 55px;
@@ -40,20 +41,11 @@ export default function DetailView() {
             {/* <img src={product.imageUrl} alt={product.name} /> */}
             <ActionItem product= {product} />
           </Grid> 
+
           <RightContainer item lg={8} md={8} sm={8} xs={12} style={{ paddingLeft: '17px' }}> 
-            <Typography variant='h4'>{product.title.longTitle}</Typography>
-            <Typography variant="body1">Product Description goes here</Typography>
-            <Typography>
-              <Box>
-                <span>Marked Price ₹</span>
-                <span><strike>{product.price.mrp}</strike></span>
-              </Box>
-              <Box>
-                <span style={{ fontSize: 28}}>Special Price </span>
-                <span style={{ fontSize: 30, color: '#878787'}}><bold>₹{product.price.cost}</bold>  </span>
-                <span style={{ color: '#388E3C'}}>{product.price.discount}</span>
-              </Box>
-            </Typography>
+            
+            <ProductDetail product={product} />
+            
           </RightContainer>
         </Container>
       ) : (
