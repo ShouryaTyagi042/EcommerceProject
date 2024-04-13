@@ -6,24 +6,37 @@ import { DataContext } from "../../context/DataProvider";
 import LoginDialog from "../Login/LoginDialog";
 import Profile from "./Profile";
 
-const Wrapper=styled(Box)`
-display:flex;
-margin:0 3% 0 auto;
-&>button{
-    margin-left:5px;
-    margin-right:40px;
-    font-size:16px
-}
-&>p,&>div{
-    margin-right:40px;
-    font-size:14px
-}
-align-item:center;
-`
 
-const CartHandle=styled(Box)`
-display:flex;
-`
+const Wrapper = styled(Box)(({ theme }) => ({
+    display: 'flex',
+    margin: '0 3% 0 auto',
+    '& > button': {
+        marginLeft: '5px',
+        marginRight: '40px',
+        fontSize: '16px',
+    },
+    '& > p, & > div': {
+        marginRight: '40px',
+        fontSize: '14px',
+    },
+    alignItems: 'center',
+    [theme.breakpoints.down('md')]: {
+        display: 'block',
+    },
+}));
+
+const CartHandle=styled(Box)(({ theme }) =>
+({
+    display:'flex',
+    // '&>div':{
+    //     marginLeft:5,
+    //     fontSize:14
+    // },
+    [theme.breakpoints.down('md')]:{
+        display:'block'
+    }
+}));
+
 const LoginButton=styled(Button)`
 color:#2874f0;
 background:#fff;
