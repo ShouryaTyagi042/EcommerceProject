@@ -5,7 +5,7 @@ import Search from './Search'
 import CustomButton from './CustomButton'
 
 const CustomHeader=styled(AppBar)`
-background: linear-gradient(to bottom, #114b96, #7b4092, #b33373, #cc4147, #c46710);
+background: linear-gradient(to bottom, #3F51B5, #9C27B0);
 height :55px;
 `
 const CustomBox=styled(Box)`
@@ -27,9 +27,14 @@ const PlusImg=styled('img')({
     marginLeft:4
 })
 
-//  const CustomButtonWrapper=styled(Box)`
-//  margin:0 5% 0 auto;
-// `
+ const CustomButtonWrapper=styled(Box)(({ theme }) => ({
+    margin: '0 5% 0 auto',
+    [theme.breakpoints.down('sm')]: {
+        display: 'none',
+    },
+ }))
+ 
+
 
 const Header=()=>{
 
@@ -47,11 +52,15 @@ const Header=()=>{
                        
                     </Box> */}
                 {/* </CustomBox> */}
-                </Component> 
-                <Search/>
-                <Box>
-                <CustomButton/>
-                </Box>
+                
+                    </Component> 
+                    <Search/>
+                    <CustomButtonWrapper>
+                    
+                    <Box>
+                    <CustomButton/>
+                    </Box>
+                    </CustomButtonWrapper>
                 
             </Toolbar>
             </CustomHeader>
