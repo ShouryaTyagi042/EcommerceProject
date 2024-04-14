@@ -8,6 +8,7 @@ display:'flex',
 margin:'55px 130px 0px 130px',
 justifyContent:'space-between',
 overflow:'overlay',
+
 [theme.breakpoints.down('lg')]:{
     margin:0
 }
@@ -27,6 +28,7 @@ font-family: inter_semi_bold, fallback-inter_semi_bold, Arial, sans-serif;
 
 const NavBar=()=>{
     return (
+        <Box style={{ background: '#fff'}}>
         <ModifiedNavBar>
             {
                 navData.map(data=> (
@@ -37,6 +39,7 @@ const NavBar=()=>{
                 ))
             }
         </ModifiedNavBar>
+        </Box>
         )
 }
 
