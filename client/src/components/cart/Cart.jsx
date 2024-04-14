@@ -1,4 +1,4 @@
-import { Typography, Grid, Box, styled } from '@mui/material';
+import { Typography, Grid, Box,Button, styled } from '@mui/material';
 import React from 'react'
 
 import { useSelector } from 'react-redux';
@@ -12,7 +12,16 @@ const Container = styled(Grid)`
 `
 const Header = styled(Box)`
     padding: 15px 24px;
+    background-color : #fff;
+    font: 24px;
     
+`
+
+const ButtonWrapper = styled(Button)`
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #ff4738;
+    color : #fff
 `
 
 export default function Cart() {
@@ -34,10 +43,15 @@ export default function Cart() {
                         <CartItem item={item} />
                     ))
                 }
-
+                <Box>
+                    <ButtonWrapper>
+                        Place Order
+                    </ButtonWrapper>
+                </Box>
             </Grid>
+            
             <Grid item lg={3} md={3} sm={12} xs={12}>
-                <TotalBal />
+                <TotalBal cartItems={cartItems}/>
             </Grid>
         
         </Container>
