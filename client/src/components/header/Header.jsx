@@ -88,7 +88,7 @@ const Header = () => {
                         <MenuIcon />
                     </IconButton>
                     <Component to='/'>
-                        <img src='./vader.svg' style={{ width: 55 }} />
+                        <img src='./ecom.png' style={{ width: 55 }} />
                     </Component>
                     <Search />
                     <CustomButtonWrapper>

@@ -1,10 +1,14 @@
-import { Box,Button, Typography,styled } from "@mui/material";
+import { Badge, Box,Button, Typography,styled } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useState,useContext } from "react";
 import { DataContext } from "../../context/DataProvider";
+import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux";
+
 //component
 import LoginDialog from "../Login/LoginDialog";
 import Profile from "./Profile";
+import CartItem from "../cart/CartItem";
 
 
 const Wrapper = styled(Box)(({ theme }) => ({
@@ -51,6 +55,9 @@ const CustomButton=()=>{
     const [open,setOpen]=useState(false)
 
     const {account,setAccount}=useContext(DataContext)
+
+    const { cartItems } = useSelector(state => state.cart);
+
     const openDialog=()=>{
         setOpen(true);
     }
@@ -64,8 +71,12 @@ const CustomButton=()=>{
             <Typography style={{marginTop:3,width:135}}>Become a Seller</Typography>
             <Typography style={{marginTop:3 }}>More</Typography>
             <CartHandle>
+                <Badge badgeContent = {cartItems.length} color="primary">
                 <ShoppingCartIcon/>
-                <Typography>Cart</Typography>
+                </Badge>
+                <Typography>
+                <Link to="/cart" style={{ textDecoration: 'none', color: "inherit" }}>Cart</Link>
+                    </Typography>
             </CartHandle>
             <LoginDialog open={open} setOpen={setOpen}/>
             {/* passing open and setOpen which is the state varibale to the LoginDialog so that it opens only when the button is clicked */}
