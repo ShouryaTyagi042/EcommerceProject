@@ -1,6 +1,8 @@
 import {Button, Typography, Box, styled } from '@mui/material'
 import { addEllipsis } from '../../utils/common-utils'
 import ButtonGroup from './ButtonGroup.jsx'
+import { removeFromCart } from '../../redux/actions/cartActions.js'
+import { useDispatch } from 'react-redux'
 
 const Component = styled(Box)`
     border-top: 1px solid #f0f0f0;
@@ -27,6 +29,14 @@ const Remove = styled(Button)`
 `
 
 export default function CartItem({item}) {
+
+    const dispatch = useDispatch();
+
+    const removeItemFromCart = (id) => {
+        dispatch(removeFromCart(id));
+        console.log("remove item from cart", id)
+    }
+
   return (
     <Component>
         <LeftComponent>
@@ -51,7 +61,10 @@ export default function CartItem({item}) {
             <span style={{ fontSize: 18, color: '#878787' }}><b><strike>{item.price.mrp} </strike></b></span>
             <span style={{ color: '#388E3C', fontWeight: 'bold' }}>{item.price.discount} Off</span>
             </Box>
-            <Remove >Remove</Remove>
+            <Remove onClick={() =>{
+                removeItemFromCart(item.id)
+            }
+            }>Remove</Remove>
         </Box>
         
     </Component>
