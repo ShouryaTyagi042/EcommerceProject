@@ -12,11 +12,11 @@ const Wrapper = styled(Box)(({ theme }) => ({
     margin: '0 3% 0 auto',
     '& > button': {
         marginLeft: '5px',
-        marginRight: '40px',
+        marginRight: '40px !important' ,
         fontSize: '16px',
     },
     '& > p, & > div': {
-        marginRight: '40px',
+        marginRight: '40px !important',
         fontSize: '14px',
     },
     alignItems: 'center',
