@@ -21,5 +21,22 @@ export const authlogin=async(data) =>{
   }
 }
 
+export const authSellerLogin=async(data)=>{
+  try{
+    return await axios.post(`${URL}/seller-login`,data);
+  }catch(error){
+      console.log("Error while calling login api ",error)
+      return error.response
+  }
+
+}
+
+export const authsellerSignUp=async(data) =>{
+  try{
+    return await axios.post(`${URL}/seller-signup`,data);
+  }catch(error){
+      console.log("Error while calling sign api ",error)
+  }
+}
 
 
