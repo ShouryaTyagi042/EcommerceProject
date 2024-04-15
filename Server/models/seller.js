@@ -1,9 +1,15 @@
 import mongoose from "mongoose";
 
 const sellerSchema = new mongoose.Schema({
-    name: {
+    firstname: {
       type: String,
       required: true
+    },
+    lastname:{
+      type:String,required:true
+    },
+    username:{
+      type:String,required:true
     },
     email: {
       type: String,
@@ -14,20 +20,20 @@ const sellerSchema = new mongoose.Schema({
       type: String,
       required: true
     },
-    company_name:{
+    Companyname:{
         type:String,
         required:true
+    },
+    GST_number:{
+      type:String,required:true,unique:true
     },
     address: {
         type:String,
         required:true
     },
-    mobile:{
+    phone:{
         type:String,
         required:true
-    },
-    balance:{
-      type:Number
     }
   });
   
