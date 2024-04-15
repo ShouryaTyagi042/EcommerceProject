@@ -1,7 +1,8 @@
 import {Box, Button, Dialog, TextField, Typography, styled} from "@mui/material"
 import { useState,useContext } from "react"
-import { authSignUp,authlogin} from "../../service/api"
+import { authSellerLogin, authSignUp,authlogin, authsellerSignUp} from "../../service/api"
 import { DataContext } from "../../context/DataProvider"
+import {   Link } from 'react-router-dom';
 // vh=viewport helps to adjust the component based on basis of viewport
 const Wrapper=styled(Box)`
 height:70vh;
@@ -71,12 +72,37 @@ const accountInitialValues={
     }
 }
 
+const accountInitialValuesForSeller={
+    login:{
+        view:"login",
+        heading:"Login",
+        subHeading:"Connect with users Worldwide to sell your products!"
+    },
+    signup:{
+        view:"signup",
+        heading:"Welcome to our Store!",
+        subHeading:"Register with us for Free!"
+    }
+}
+
 const signupInitialValues={
     firstname:"",
     lastname:"",
     username:"",
     email:"",
     password:"",
+    phone:""
+}
+
+const signupInitialValuesForSeller={
+    firstname:"",
+    lastname:"",
+    username:"",
+    email:"",
+    password:"",
+    Companyname:"",
+    GST_number:"",
+    address:"",
     phone:""
 }
 
@@ -94,24 +120,32 @@ font-weigth:580;
 `
 
 const LoginDialog=({open,setOpen})=>{
+    const[proceed,setProceed]=useState(true)
     const[signup,setSignup]=useState(signupInitialValues)
     //to take input from the front to the backend
+    const {setAccount,log,setLogger}=useContext(DataContext);
+    //to display the name in the header once the signup is compelete
     const [account,toggleaccount]=useState(accountInitialValues.login)
+    const[selleraccount,toggleaccountforSeller]=useState(accountInitialValuesForSeller.login)
+    const [sellerSignup,setsellerSignup]=useState(signupInitialValuesForSeller)
+    const[sellerLogin,setsellerLogin]=useState(loginInitialValues)
 
     //to initially have the login page for the view and we can set or reset the page based on the value of the state variable account
     const[login,setLogin]=useState(loginInitialValues)
     //To handle the login and update the name in the header as a user logs in
-   const {setAccount}=useContext(DataContext);
-   //to display the name in the header once the signup is compelete
+
    const[error,setError]=useState(false)
    //to handle the case where a user does invalid login
-    const openSignup=()=>{
-        toggleaccount(accountInitialValues.signup)
+   const openSignup=()=>{
+    toggleaccount(accountInitialValues.signup)
+   }
+    const openSignupforSeller=()=>{
+        toggleaccountforSeller(accountInitialValuesForSeller.signup)
     }
 
     const handleClose=()=>{
         setOpen(false);
-        toggleaccount(accountInitialValues.login)
+        toggleaccountforSeller(accountInitialValuesForSeller.login)
         setError(false)
     }
     
@@ -128,8 +162,23 @@ const LoginDialog=({open,setOpen})=>{
 
 
     }
+
+    const signupSeller=async()=>{
+        let response=authsellerSignUp(sellerSignup)
+        if(!response)return ;
+        handleClose();
+        setAccount(sellerSignup.firstname)
+    }
     const onInputChange=(event)=>{
         setLogin({...login,[event.target.name]:event.target.value})
+    }
+
+    const onInputChangeforseller=(event)=>{
+        setsellerLogin({...sellerLogin,[event.target.name]:event.target.value})
+    }
+
+    const onValueChangeforSeller=(event)=>{
+        setsellerSignup({...sellerSignup,[event.target.name]:event.target.value})
     }
 
     const loginUser=async()=>{
@@ -138,14 +187,31 @@ const LoginDialog=({open,setOpen})=>{
        if(response.status==200){
         handleClose();
         setAccount(response.data.user.firstname)
+        setPer
        }else{
         setError(true);
 
        }
     }
+    const loginSeller=async()=>{
+        let response= await authSellerLogin(sellerLogin)
+        console.log(response)
+        if(response.status==200){
+         handleClose();
+         setAccount(response.data.seller.firstname)
+         setProceed(false)
+        }
+        else{
+         setError(true);
+ 
+        }
+     }
 
     return(
        <Dialog  open={open} onClose={handleClose} PaperProps={{sx:{maxWidth:"unset"}}}>
+        {
+            log=='user'?
+        
             <Wrapper> 
                 {/* Warpper div for the login page */}
                     <LoginImage>
@@ -177,6 +243,47 @@ const LoginDialog=({open,setOpen})=>{
                         </RightWrapper>
                     }
             </Wrapper>
+            :
+            <Wrapper> 
+                {/* Warpper div for the login page */}
+                    <LoginImage>
+                        <Typography variant="h4">{selleraccount.heading}</Typography>
+                        <Typography style={{marginTop:20}} variant="h6">{selleraccount.subHeading}</Typography>
+
+                    </LoginImage>
+                    { selleraccount.view=='login'?
+                    // if we have to login then this wrapper will execute else signup wrapper will be executed
+                        <RightWrapper>
+                            <TextField id="filled-basic" label="Enter your Username" variant="standard" onChange={(event)=>onInputChangeforseller(event)}name="username"/>
+                          {error && <Error>Please enter valid username or password</Error>}
+                            <TextField id="filled-basic" label="Enter Password" variant="standard"onChange={(event)=>onInputChangeforseller(event)}name="password" />
+                            <Text>By continuing you agree to our terms and Privacy Policy</Text>
+                            
+                            <Link to="seller">
+                            <LoginButton onClick={()=>loginSeller()}>Login</LoginButton>
+                            </Link>
+
+                            <Typography style={{textAlign:"center"}}>OR</Typography>
+                            <RequestOtpButton>Request OTP</RequestOtpButton>
+                            <CreateAccount onClick={()=>openSignupforSeller()}>New to our website? Create your free account!</CreateAccount>
+                        </RightWrapper>
+                    :
+                        <RightWrapper>
+                            <TextField id="filled-basic" label="Enter First Name" variant="standard" name="firstname" onChange={()=>onValueChangeforSeller(event)} />
+                            <TextField id="filled-basic" label="Enter Last Name" variant="standard" name="lastname" onChange={()=>onValueChangeforSeller(event)}/>
+                            <TextField id="filled-basic" label="Enter Username" variant="standard" name="username" onChange={()=>onValueChangeforSeller(event)}/>
+                            <TextField id="filled-basic" label="Enter Email" variant="standard" name="email" onChange={()=>onValueChangeforSeller(event)}/>
+                            <TextField id="filled-basic" label="Enter Password" variant="standard" name="password" onChange={()=>onValueChangeforSeller(event)}/>
+                            <TextField id="filled-basic" label="Enter the name of your company" variant="standard" name="Companyname" onChange={()=>onValueChangeforSeller(event)} />
+                            <TextField id="filled-basic" label="Enter GST number of your registered company" variant="standard" name="GST_number" onChange={()=>onValueChangeforSeller(event)} /> 
+                            
+                            <TextField id="filled-basic" label="Enter your address" variant="standard" name="address" onChange={()=>onValueChangeforSeller(event)} />
+                            <TextField id="filled-basic" label="Enter Your mobile no." variant="standard" name="phone" onChange={()=>onValueChangeforSeller(event)}/>
+                            <LoginButton onClick={()=>signupSeller()}>Continue</LoginButton>
+                        </RightWrapper>
+                    }
+            </Wrapper>
+            }
        </Dialog>
     )
 }

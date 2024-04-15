@@ -54,21 +54,29 @@ font-weight:650;
 const CustomButton=()=>{
     const [open,setOpen]=useState(false)
 
-    const {account,setAccount}=useContext(DataContext)
+    const {account,setAccount,log,setLogger}=useContext(DataContext)
 
     const { cartItems } = useSelector(state => state.cart);
 
-    const openDialog=()=>{
+    const openDialogForUser=()=>{
         setOpen(true);
+        setLogger('user');
+        console.log(log);
+    }
+    const openDialogForSeller=()=>{
+        setLogger('seller');
+        setOpen(true);
+        
+        console.log(log)
     }
     return (
         <Wrapper>
             {
                 account ?<Profile account={account} setAccount={setAccount}/>:
-                <LoginButton variant="contained" onClick={()=>openDialog()}>Login</LoginButton>
+                <LoginButton variant="contained" onClick={()=>openDialogForUser()}>Login</LoginButton>
             }
 
-            <Typography style={{marginTop:3,width:135}}>Become a Seller</Typography>
+            <Typography style={{marginTop:3,width:135,cursor: 'pointer'}} onClick={()=>openDialogForSeller() }>Become a Seller</Typography>
             <Typography style={{marginTop:3 }}>More</Typography>
             <CartHandle>
                 <Badge badgeContent = {cartItems.length} color="primary">
