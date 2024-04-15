@@ -6,10 +6,10 @@ import { findSeller } from "../services/seller.js";
 export const createSeller = async (req, res) => {
     try {
       console.log(req.body);
-      const { name, email, password,company_name,address, mobile } = req.body;
+      const { firstname, lastname,username,email,password,Companyname,GST_number,address, phone } = req.body;
       if (await checkSeller(email)) throw new Error("user already exists");
       const pass = await hashPassword(password);
-      const seller = await Seller.create({ name, email, password:pass, company_name,address, mobile });
+      const seller = await Seller.create({ firstname, lastname,username,email,password:pass,Companyname,GST_number,address, phone });
       console.log(seller);
       res.status(201).send({ seller });
     } catch (error) {
@@ -18,8 +18,8 @@ export const createSeller = async (req, res) => {
   };
   export const loginSeller = async (req, res) => {
     try {
-        const {email, password } = req.body;
-        const seller = await findSeller(email, password);
+        const {username, password } = req.body;
+        const seller = await findSeller(username, password);
         console.log(seller)
         const token = genAuthToken(seller._id);
         console.log(seller)
