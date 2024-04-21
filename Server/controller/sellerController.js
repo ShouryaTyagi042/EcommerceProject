@@ -38,3 +38,18 @@ export const createSeller = async (req, res) => {
     }
   }
   
+
+  export const allSellerDetails=async(req,res)=>{
+    try{
+      console.log("userID",req._id)
+      const allSeller=await Seller.find()
+      res.status(200).json({
+        message : "All Seller ",
+        data : allSeller,
+        success : true,
+        error : false
+    })
+    }catch(error){
+      res.status(400).json({error:error.message})
+    }
+  }
