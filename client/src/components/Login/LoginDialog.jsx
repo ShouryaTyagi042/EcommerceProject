@@ -123,7 +123,7 @@ const LoginDialog=({open,setOpen})=>{
     const[proceed,setProceed]=useState(true)
     const[signup,setSignup]=useState(signupInitialValues)
     //to take input from the front to the backend
-    const {setAccount,log,setLogger}=useContext(DataContext);
+    const {setAccount,log,setLogger,userdetail,setuserDetail}=useContext(DataContext);
     //to display the name in the header once the signup is compelete
     const [account,toggleaccount]=useState(accountInitialValues.login)
     const[selleraccount,toggleaccountforSeller]=useState(accountInitialValuesForSeller.login)
@@ -142,8 +142,12 @@ const LoginDialog=({open,setOpen})=>{
     const openSignupforSeller=()=>{
         toggleaccountforSeller(accountInitialValuesForSeller.signup)
     }
-
     const handleClose=()=>{
+        setOpen(false);
+        toggleaccount(accountInitialValues.login)
+        setError(false)
+    }
+    const handleCloseforSeller=()=>{
         setOpen(false);
         toggleaccountforSeller(accountInitialValuesForSeller.login)
         setError(false)
@@ -166,7 +170,7 @@ const LoginDialog=({open,setOpen})=>{
     const signupSeller=async()=>{
         let response=authsellerSignUp(sellerSignup)
         if(!response)return ;
-        handleClose();
+        handleCloseforSeller();
         setAccount(sellerSignup.firstname)
     }
     const onInputChange=(event)=>{
@@ -186,8 +190,9 @@ const LoginDialog=({open,setOpen})=>{
        console.log(response)
        if(response.status==200){
         handleClose();
+        setuserDetail({...userdetail,userdetail:response.data.user})
+        console.log(userdetail)
         setAccount(response.data.user.firstname)
-        setPer
        }else{
         setError(true);
 
@@ -197,7 +202,7 @@ const LoginDialog=({open,setOpen})=>{
         let response= await authSellerLogin(sellerLogin)
         console.log(response)
         if(response.status==200){
-         handleClose();
+            handleCloseforSeller();
          setAccount(response.data.seller.firstname)
          setProceed(false)
         }
