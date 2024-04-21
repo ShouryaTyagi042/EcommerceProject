@@ -48,3 +48,19 @@ export const getProductsById = async(req, res) =>{
         console.log(error.message);
     }
 }
+
+
+export const allProductsDetails=async(req,res)=>{
+    try{
+      console.log("userID",req.username)
+      const allProducts=await Product.find()
+      res.status(200).json({
+        message : "All Products",
+        data : allProducts,
+        success : true,
+        error : false
+    })
+    }catch(error){
+      res.status(400).json({error:error.message})
+    }
+  }
