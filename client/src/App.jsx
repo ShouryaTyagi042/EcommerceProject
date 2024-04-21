@@ -1,14 +1,19 @@
-import { useState } from 'react'
-
+import { useContext, useEffect, useState } from 'react'
+import{ useDispatch,useSelector} from "react-redux"
 //components
 import Header from './components/header/Header'
 import Home from './components/Home/Home'
-import DataProvider from './context/DataProvider'
+import DataProvider, { DataContext } from './context/DataProvider'
 import { Box } from '@mui/material'
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import {BrowserRouter, Routes, Route,} from 'react-router-dom'
 import DetailView from './components/details/DetailView'
 import Cart from './components/cart/Cart'
-import SellerPage from './components/SellerPage'
+import SellerPage from './components/pages/SellerPage'
+import AdminPage from './components/pages/AdminPage'
+import './App.css';
+
+
+
 function App() {
 
   return (
@@ -24,6 +29,7 @@ function App() {
           <Route path="/product/:id" element = {<DetailView/>} />
           <Route path ="/cart" element= {<Cart/>} />
           <Route path="/seller" element={<SellerPage/>}/>
+          <Route path='/admin-panel' element={<AdminPage/>}/>
           {/* <DetailView /> */}
         </Routes>
         </Box>
