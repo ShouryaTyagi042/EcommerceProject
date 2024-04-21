@@ -40,6 +40,15 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  role:{
+    type:String,
+    default:"GENERAL"
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now ,// Automatically set the current date and time on user creation
+    timezone: '+0530'
+  }
 });
 
 const User = mongoose.model("User", userSchema);
