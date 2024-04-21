@@ -39,4 +39,12 @@ export const authsellerSignUp=async(data) =>{
   }
 }
 
+export const getSellerProduct=async(seller)=>{
+  try{
+    const {data}=axios.get(`${URL}/products`);
+  }catch(error){
+
+  }
+}
+
 
