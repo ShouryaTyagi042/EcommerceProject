@@ -5,12 +5,31 @@ import { genAuthToken } from "../utility/genToken.js";
 import { checkUser } from "../services/user.js";
 import { hashPassword } from "../utility/hashpass.js";
 // >>>>>>> main
+
+export const Userdetail=async(req,res)=>{
+try{
+  const UserData=await User.findOne(req.username)
+  res.json({
+    data :UserData,
+    success : true,
+})
+}catch(error)
+{
+  res.status(400).json({
+    message : error.message,
+    error : true,
+    success : false
+  })
+}
+}
+
 export const createUser = async (req, res) => {
   try {
     console.log(req.body);
     const { firstname,lastname,username,email, password,  phone } = req.body;
     
     if (await checkUser(email)) throw new Error("user already exists");
+    const role="GENERAL";
     const pass = await hashPassword(password);
     const user = await User.create({ firstname,lastname,username, email, password:pass, phone});
     
@@ -60,6 +79,44 @@ export const logoutUser = async (req, res) => {
       res.status(200).send(msg)
   } catch (error) {
       res.status(400).json({ error: error.message });
+  }
+}
+
+export const allUserDetails=async(req,res)=>{
+  try{
+    console.log("userID",req.username)
+    const allUsers=await User.find()
+    res.status(200).json({
+      message : "All User ",
+      data : allUsers,
+      success : true,
+      error : false
+  })
+  }catch(error){
+    res.status(400).json({error:error.message})
+  }
+}
+
+export const updateUser=async(req,res)=>{
+  try{
+    const {firstname,lastname,email,userID,role}=req.body
+    const payload={
+      ...(firstname &&{firstname:firstname}),
+      ...(lastname &&{lastname:lastname}),
+      ...(email&&{email:email}),
+      ...(role &&{role:role}),
+    }
+    const updateUser=await User.findByIdAndUpdate(userID,payload)
+    res.status(200).json({
+      message:"User Updated",
+      data:updateUser,
+      success:true
+    })
+
+  }catch(error){
+      res.send(401).json({
+        message:error.message
+      })
   }
 }
 
