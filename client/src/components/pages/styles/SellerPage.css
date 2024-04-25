@@ -1,0 +1,39 @@
+/* SellerPage.css */
+
+.title {
+  text-align: center;
+  font-size: larger;
+  background: linear-gradient(to right, red, blue);
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-top: 5%;
+  margin-bottom: 3%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.button {
+  background: linear-gradient(to right, rgba(255, 0, 102, 0.767), rgba(136, 0, 255, 0.841));
+  color: white;
+  font-size: larger;
+  padding: 10px 0;
+  width: 42%;
+  height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent; */
+  transition: transform 0.3s ease-in-out;
+  flex-direction: column;
+}
+
+.button:hover {
+  transform: scale(1.025  );
+  background: linear-gradient(to right, rgba(207, 67, 139, 0.956), rgba(136, 0, 255, 0.610),);
+}
