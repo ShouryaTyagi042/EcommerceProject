@@ -17,11 +17,15 @@ const productSchema = new mongoose.Schema({
 
     seller:{
       type: String,
-      default: "Jesus",
+      default: "Hesus",
     },
     warranty:{
       type: String,
       default: "Not mentioned",
+    },
+
+    sellerId:{
+      type: mongoose.Schema.Types.ObjectId,
     },
     
     // sellerMail: {
