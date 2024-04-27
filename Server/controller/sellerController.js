@@ -3,6 +3,7 @@ import { hashPassword } from "../utility/hashpass.js";
 import { checkSeller } from "../services/seller.js";
 import { genAuthToken } from "../utility/genToken.js";
 import { findSeller } from "../services/seller.js";
+// import { setsellerDetail } from ".."
 export const createSeller = async (req, res) => {
     try {
       console.log(req.body);
@@ -24,6 +25,7 @@ export const createSeller = async (req, res) => {
         const token = genAuthToken(seller._id);
         console.log(seller)
         res.status(200).send({ seller, token })
+        // setsellerDetail(seller);
     } catch (error) {
         res.status(401).json({ error: error.message });
     }

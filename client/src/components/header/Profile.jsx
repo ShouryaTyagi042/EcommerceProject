@@ -19,7 +19,7 @@ const Logout=styled(Typography)`
 // `
 
 const Profile =({account,setAccount}) =>{
-    const{userdetail}=useContext(DataContext)
+    const{userdetail, log}=useContext(DataContext)
     const handleClick=(event)=>{
         setOpen(event.currentTarget)
     }
@@ -44,7 +44,7 @@ const Profile =({account,setAccount}) =>{
                 <Logout>Logout</Logout>
                 <PowerSettingsNewIcon color="primary" fontSize="small" />
                 </MenuItem>
-            {userdetail.userdetail.role=="ADMIN"?
+            {log === "user" && userdetail.userdetail.role=="ADMIN"?
             <MenuItem>
             
            <Link style={{textDecoration:'none' ,color:'inherit'}} to="admin-panel">

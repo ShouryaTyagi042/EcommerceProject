@@ -123,7 +123,7 @@ const LoginDialog=({open,setOpen})=>{
     const[proceed,setProceed]=useState(true)
     const[signup,setSignup]=useState(signupInitialValues)
     //to take input from the front to the backend
-    const {setAccount,log,setLogger,userdetail,setuserDetail}=useContext(DataContext);
+    const {setAccount,log,setLogger,userdetail,setuserDetail,sellerDetail, setsellerDetail}=useContext(DataContext);
     //to display the name in the header once the signup is compelete
     const [account,toggleaccount]=useState(accountInitialValues.login)
     const[selleraccount,toggleaccountforSeller]=useState(accountInitialValuesForSeller.login)
@@ -200,9 +200,13 @@ const LoginDialog=({open,setOpen})=>{
     }
     const loginSeller=async()=>{
         let response= await authSellerLogin(sellerLogin)
-        console.log(response)
+        console.log("thi 1" + response)
         if(response.status==200){
             handleCloseforSeller();
+            // setsellerDetail({...sellerDetail,sellerDetail:response.data.seller});
+            setsellerDetail(response.data.seller);
+            const seller = response.data.seller;
+            console.log("thi" + seller.firstname);
          setAccount(response.data.seller.firstname)
          setProceed(false)
         }
