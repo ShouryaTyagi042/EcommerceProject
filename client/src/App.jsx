@@ -11,6 +11,7 @@ import Cart from './components/cart/Cart'
 import SellerPage from './components/pages/SellerPage'
 import AdminPage from './components/pages/AdminPage'
 import './App.css';
+import SellerProducts from './components/pages/SellerProducts'
 
 
 
@@ -30,6 +31,7 @@ function App() {
           <Route path ="/cart" element= {<Cart/>} />
           <Route path="/seller" element={<SellerPage/>}/>
           <Route path='/admin-panel' element={<AdminPage/>}/>
+          <Route path="/allproducts" element={<SellerProducts/>}/>
           {/* <DetailView /> */}
         </Routes>
         </Box>
