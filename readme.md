@@ -28,4 +28,4 @@ You can find the Postman collection for this project [here](https://www.postman.
 
 Contributions are welcome!
 
-![Landing page](./client/public/image.jpg)
+![Landing page](https://github.com/ShouryaTyagi042/EcommerceProject/tree/main/client/public/ecomUI.png)
