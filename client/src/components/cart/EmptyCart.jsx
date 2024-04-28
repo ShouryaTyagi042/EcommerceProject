@@ -1,16 +1,17 @@
 import React from 'react'
 import { Typography, Box } from '@mui/material'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 
 export default function EmptyCart() {
   return (
-    <Box textAlign="center">
-      {/* <img src="https://your-image-url.com/empty-cart.png" alt="Empty Cart" style={{ width: '200px', height: '200px' }} /> */}
-      <Typography variant="h6" mt={2}>
+    <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" height="55vh" textAlign="center">
+      <Typography variant="h4" mt={2} style={{ fontFamily: 'monospace' }}>
         There is nothing to show here yet
       </Typography>
-      <Typography variant="subtitle1">
+      <Typography variant="h5" style={{ fontFamily: 'monospace' }}>
         Add items to it now
       </Typography>
+      <ShoppingCartIcon style={{ fontSize: 50 }} />
     </Box>
   )
 }
