@@ -5,6 +5,8 @@ import { DataContext } from "../../context/DataProvider";
 import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
 
+import { Dialog, DialogTitle, DialogContent, DialogContentText, Link as Linker} from '@mui/material';
+
 //component
 import LoginDialog from "../Login/LoginDialog";
 import Profile from "./Profile";
@@ -58,6 +60,16 @@ const CustomButton=()=>{
 
     const { cartItems } = useSelector(state => state.cart);
 
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    const handleMenu = () => {
+    setMenuOpen(true);
+    };
+
+    const handleClose = () => {
+    setMenuOpen(false);
+    };
+
     const openDialogForUser=()=>{
         setOpen(true);
         setLogger('user');
@@ -69,6 +81,7 @@ const CustomButton=()=>{
         
         console.log(log)
     }
+
     return (
         <Wrapper>
             {
@@ -77,7 +90,7 @@ const CustomButton=()=>{
             }
 
             <Typography style={{marginTop:3,width:135,cursor: 'pointer'}} onClick={()=>openDialogForSeller() }>Become a Seller</Typography>
-            <Typography style={{marginTop:3 }}>More</Typography>
+            <Typography style={{marginTop:3, cursor: 'pointer'}} onClick={()=>handleMenu()} >More</Typography>
             <CartHandle>
                 <Badge badgeContent = {cartItems.length} color="primary">
                 <ShoppingCartIcon/>
@@ -88,6 +101,24 @@ const CustomButton=()=>{
             </CartHandle>
             <LoginDialog open={open} setOpen={setOpen}/>
             {/* passing open and setOpen which is the state varibale to the LoginDialog so that it opens only when the button is clicked */}
+            <Typography style={{marginTop:3, cursor: 'pointer'}} onClick={handleMenu} >More</Typography>
+        <Dialog open={menuOpen} onClose={handleClose}>
+        <DialogTitle>Visit the Developers</DialogTitle>
+        <DialogContent>
+        <DialogContentText>
+            <Linker href="https://github.com/Alankrit15"
+             target="_blank" rel="noopener" style={{ color: 'inherit', textDecoration: 'none' }}>
+                Alankrit
+                </Linker>
+            </DialogContentText>
+            <DialogContentText>
+            <Linker href="https://github.com/Darth-InVader15"
+             target="_blank" rel="noopener" style={{ color: 'inherit', textDecoration: 'none' }}>
+                Piyush
+                </Linker>
+            </DialogContentText>
+        </DialogContent>
+        </Dialog>
         </Wrapper>
     )
 }
