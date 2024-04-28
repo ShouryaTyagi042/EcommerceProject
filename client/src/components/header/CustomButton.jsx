@@ -90,17 +90,9 @@ const CustomButton=()=>{
             }
 
             <Typography style={{marginTop:3,width:135,cursor: 'pointer'}} onClick={()=>openDialogForSeller() }>Become a Seller</Typography>
-            <Typography style={{marginTop:3, cursor: 'pointer'}} onClick={()=>handleMenu()} >More</Typography>
-            <CartHandle>
-                <Badge badgeContent = {cartItems.length} color="primary">
-                <ShoppingCartIcon/>
-                </Badge>
-                <Typography>
-                <Link to="/cart" style={{ textDecoration: 'none', color: "inherit" }}>Cart</Link>
-                    </Typography>
-            </CartHandle>
-            <LoginDialog open={open} setOpen={setOpen}/>
-            {/* passing open and setOpen which is the state varibale to the LoginDialog so that it opens only when the button is clicked */}
+
+            {/* <Typography style={{marginTop:3, cursor: 'pointer'}} onClick={()=>handleMenu()} >More</Typography> */}
+
             <Typography style={{marginTop:3, cursor: 'pointer'}} onClick={handleMenu} >More</Typography>
         <Dialog open={menuOpen} onClose={handleClose}>
         <DialogTitle>Visit the Developers</DialogTitle>
@@ -119,6 +111,19 @@ const CustomButton=()=>{
             </DialogContentText>
         </DialogContent>
         </Dialog>
+
+            <CartHandle>
+                <Badge badgeContent = {cartItems.length} color="primary">
+                <ShoppingCartIcon/>
+                </Badge>
+                <Typography>
+                <Link to="/cart" style={{ textDecoration: 'none', color: "inherit" }}>Cart</Link>
+                    </Typography>
+            </CartHandle>
+            <LoginDialog open={open} setOpen={setOpen}/>
+            {/* passing open and setOpen which is the state varibale to the LoginDialog so that it opens only when the button is clicked */}
+
+            
         </Wrapper>
     )
 }
