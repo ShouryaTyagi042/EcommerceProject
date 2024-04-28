@@ -28,10 +28,11 @@ const productSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
     },
     
-    // sellerMail: {
-    //   type: String,
-    //   require: true,
-    // },
+    sellerMail: {
+      type: String,
+      require: true,
+      default: "seller1@gmail.com",
+    },
 
     // Can replace sellerMail with sellerID in the future
     // sellerId: {
