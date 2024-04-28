@@ -36,6 +36,24 @@ export const createNewProduct = async(req, res) =>
     }
 };
 
+export const getProductByMail = async(req, res) => 
+{
+    try
+    {
+        const mail = req.params.sellerMail;
+        console.log(mail);
+        
+        const product = await Product.find({ 'sellerMail' : mail });
+        console.log(product);
+
+        res.status(200).json(product);
+    }
+    catch(error)
+    {
+        res.status(500).json({ message : error.message });
+    }
+}
+
 export const getProductsById = async(req, res) =>{
     try{
         const id = req.params.id;
