@@ -12,7 +12,7 @@ import SellerPage from './components/pages/SellerPage'
 import AdminPage from './components/pages/AdminPage'
 import './App.css';
 import SellerProducts from './components/pages/SellerProducts'
-
+import SellerAddNewProducts from './components/pages/SellerAddNewProducts'
 
 
 function App() {
@@ -32,6 +32,7 @@ function App() {
           <Route path="/seller" element={<SellerPage/>}/>
           <Route path='/admin-panel' element={<AdminPage/>}/>
           <Route path="/allproducts" element={<SellerProducts/>}/>
+          <Route path="/addnewproducts" element={<SellerAddNewProducts/>}/>
           {/* <DetailView /> */}
         </Routes>
         </Box>
