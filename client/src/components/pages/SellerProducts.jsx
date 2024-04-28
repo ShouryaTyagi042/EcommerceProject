@@ -2,6 +2,7 @@ import React from 'react';
 import { useContext, useEffect, useState } from 'react';
 import { DataContext } from '../../context/DataProvider';
 import './styles/SellerProducts.css';
+import axios from 'axios';
 const URL="http://localhost:5000";
 
 const SellerProducts = () => {
