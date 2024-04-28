@@ -14,6 +14,9 @@ const SellerPage = () => {
     navigate('/allproducts');
   };
 
+  const handleButtonAddNewProducts = () => {
+    navigate('/addnewproducts');
+  }
 
   const {log, sellerDetail} = useContext(DataContext);
   console.log("This is just a test " + sellerDetail.firstname);
@@ -25,7 +28,7 @@ const SellerPage = () => {
       </div>
 
       <div> 
-        <h3>Total Income = Rs. 0</h3>
+        <h3>Total Income = Fetching...</h3>
       </div>
       {/* Hard coded this line, will change later */}
       
@@ -34,7 +37,7 @@ const SellerPage = () => {
           <FaRegListAlt size={88} style={{ marginBottom: '30px' }} />
           Show all my products
         </button>
-        <button className="button">
+        <button className="button" onClick={handleButtonAddNewProducts}>
           <FaPlusSquare size={88} style={{ marginBottom: '30px' }} />
           Add new products
         </button>
