@@ -54,6 +54,8 @@ font-weight:650;
 `
 
 const CustomButton=()=>{
+    const loggerJSON=window.localStorage.getItem('logger')
+    const logger=JSON.parse(loggerJSON)
     const [open,setOpen]=useState(false)
 
     const {account,setAccount,log,setLogger}=useContext(DataContext)
@@ -89,7 +91,8 @@ const CustomButton=()=>{
                 <LoginButton variant="contained" onClick={()=>openDialogForUser()}>Login</LoginButton>
             }
 
-            <Typography style={{marginTop:3,width:135,cursor: 'pointer'}} onClick={()=>openDialogForSeller() }>Become a Seller</Typography>
+           <Typography style={{marginTop:3,width:135,cursor: 'pointer'}} onClick={()=>openDialogForSeller() }>Become a Seller</Typography>
+        
 
             {/* <Typography style={{marginTop:3, cursor: 'pointer'}} onClick={()=>handleMenu()} >More</Typography> */}
 
