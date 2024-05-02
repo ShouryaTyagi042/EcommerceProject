@@ -8,14 +8,18 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const SellerPage = () => {
+  // alert("Welcome Dear User");
   const {account,setAccount,log, sellerDetail,setsellerDetail} = useContext(DataContext);
 
   useEffect(()=>{
     const loggedSellerJSON=window.localStorage.getItem('loggedSeller')
     const seller=JSON.parse(loggedSellerJSON)
-    console.log(seller.firstname)
-    setsellerDetail(seller)
-    setAccount(seller.firstname)
+    // console.log(seller.firstname)
+    if (seller) {
+      console.log("Darth was here but this is :-" + seller.firstname);
+      setsellerDetail(seller)
+      setAccount(seller.firstname)
+    }
   },[])
   const navigate = useNavigate();
 
@@ -27,12 +31,17 @@ const SellerPage = () => {
     navigate('/addnewproducts');
   }
 
-  console.log("This is just a test " + sellerDetail.firstname);
+  // console.log("This is just a test " + sellerDetail.firstname );
 
   return (
     <div>
       <div className="title">
-        <h1>Welcome {account}</h1>
+        
+      {sellerDetail ? (
+        <h1>Welcome {sellerDetail.firstname}</h1>
+      ) : (
+        <h1>Loading...</h1>
+      )}
         
       </div>
 
