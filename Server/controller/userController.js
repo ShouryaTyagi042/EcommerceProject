@@ -64,11 +64,15 @@ export const loginUser = async (req, res) => {
   try {
       const {username, password } = req.body;
       const user = await findUser(username, password);
-      console.log(user)
-      const token = genAuthToken(user._id);
+      if (user) {
+        // Create a new session and store user data
+        req.session.firstname = user.firstname
+      console.log(req.session.firstname)
+      const token = genAuthToken(user._id,user.firstname);
+      
       console.log(user)
       res.status(200).send({ user, token })
-  } catch (error) {
+  }} catch (error) {
       res.status(401).json({ error: error.message });
   }
 }
@@ -120,3 +124,19 @@ export const updateUser=async(req,res)=>{
   }
 }
 
+export const ProfileDisplay=(req,res)=>{
+  try{
+    if (req.session.user) {
+      // The user is logged in, you can access the user's data from the session
+      const { firstname } = req.session.firstname;
+    return res.json({valid:true,firstname:firstname})
+    }
+  else
+  return res.json({valid:false})
+  }
+  catch(error){
+    res.send(401).json({
+      message:error.message
+    })
+  }
+}

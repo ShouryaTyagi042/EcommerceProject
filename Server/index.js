@@ -9,6 +9,8 @@ import cartRoute from "./routes/cartRoute.js";
 import  { paymentSettled } from "./services/paymentSettled.js"
 import DefaultData from "./default.js";
 import cors from "cors"
+import session from "express-session";
+import cookieParser from "cookie-parser";
 
 
 
@@ -16,7 +18,16 @@ import cors from "cors"
 const app = express();
 const port = process.env.PORT;
 
-
+app.use(session({
+  secret:"secret",
+  resave:false,
+  saveUninitialized:false,
+  cookie:{
+    secure:false,
+    maxAge:1000*60*60*24 //time after which the cookie will be unset here it is one day
+  }
+}))
+app.use(cookieParser())
 app.use(cors())
 app.use(express.json());
 app.use(userRoute);
@@ -24,6 +35,8 @@ app.use(sellerRoute);
 app.use(productRoute);
 app.use(orderRoute);
 app.use(cartRoute);
+
+
 app.get("/", (req, res) => {
   res.send("Ecommerce API backend");
 });
@@ -37,7 +50,6 @@ dbConnect()
   .catch((error) => {
     console.log(`Error connnecting to the database ${error}`);
   });
-
   DefaultData()
 
   paymentSettled
