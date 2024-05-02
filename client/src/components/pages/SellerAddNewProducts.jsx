@@ -9,7 +9,8 @@ function SellerAddNewProducts() {
   const { sellerDetail } = useContext(DataContext);
   const initialState = { name: '', description: '', price: '', quantity: '' };
   const [product, setProduct] = useState(initialState);
-
+  const sellerJSON=window.localStorage.getItem('loggedSeller');
+  const seller=JSON.parse(sellerJSON)
   const handleChange = (e) => {
     setProduct({...product, [e.target.name]: e.target.value });
   };
@@ -17,7 +18,7 @@ function SellerAddNewProducts() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/add-new-product', {...product, sellerMail: sellerDetail.email, id: Math.floor(Math.random() * 10000) });
+      await axios.post('http://localhost:5000/add-new-product', {...product, sellerMail: seller.email, id: Math.floor(Math.random() * 10000) });
       alert('Product added successfully');
       setProduct(initialState); // Reset the form
     } catch (error) {
@@ -28,7 +29,7 @@ function SellerAddNewProducts() {
   return (
     <div>
       <h2>Tell us more about this Product</h2>
-      <p style={{fontFamily: 'monospace'}}>Associated Email id: {sellerDetail ? sellerDetail.email : 'Loading...'}</p>
+      <p style={{fontFamily: 'monospace'}}>Associated Email id: {seller ? seller.email : 'Loading...'}</p>
       <form onSubmit={handleSubmit}>
         <input type="text" name="name" placeholder="Product Name" onChange={handleChange} value={product.name} required />
         <input type="number" name="price" placeholder="Product Price" onChange={handleChange} value={product.price} required />

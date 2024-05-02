@@ -45,7 +45,17 @@ color:inherit;
 `
 
 const AdminPage=()=>{
-
+    const[user,setUser]=useState('')
+  const[info,setinfo]=useState({})
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedUser')
+    const loggedUser = window.localStorage.getItem('logger')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      const logger = JSON.parse(loggedUser)
+      setinfo(user)
+    }
+  }, [])
 
     const{log,userdetail}=useContext(DataContext)
     const[alldisplay,setDisplay]=useState("")
@@ -68,8 +78,8 @@ const AdminPage=()=>{
         <SideBar>
             <ProfileBox>
                 <Profile/>
-                <Name>{userdetail.userdetail.firstname}</Name>
-                <Typography>Role:{userdetail.userdetail.role}</Typography>
+                <Name>{info.firstname}</Name>
+                <Typography>Role:{info.role}</Typography>
             </ProfileBox>
                 <ModifiedButton onClick={()=>handleHome()}style={{display:'block'}}>Home</ModifiedButton>
                 <ModifiedButton onClick={()=>handleuser()}style={{display:'block'}}>ALL Users</ModifiedButton>

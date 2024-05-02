@@ -1,8 +1,12 @@
 import { Typography,Box,Menu,MenuItem,styled } from "@mui/material"
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
-import { Link } from "react-router-dom";
+import { Link,useNavigate} from "react-router-dom";
 import { DataContext } from "../../context/DataProvider";
+import axios from 'axios'
+import { SevenK } from "@mui/icons-material";
+const URL="http://localhost:5000";
+
 
 const ModifiedMenu=styled(Menu)`
 margin-top:5px;
@@ -19,6 +23,39 @@ const Logout=styled(Typography)`
 // `
 
 const Profile =({account,setAccount}) =>{
+  const navigate=useNavigate()
+  const[user,setUser]=useState('')
+  const[info,setinfo]=useState({})
+  useEffect(() => {
+    
+    const logged = window.localStorage.getItem('logger')
+    const logger=JSON.parse(logged)
+    console.log(logger)
+    if(logger=='user')
+    { const loggedUserJSON = window.localStorage.getItem('loggedUser')
+      if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      console.log(user)
+      setUser(logger)
+      setAccount(user.firstname)
+      setinfo(user)
+    }
+    }
+      else
+      {
+        const sellerJSON=window.localStorage.getItem('loggedSeller')
+        console.log(sellerJSON)
+        if(sellerJSON)
+        {
+          const seller=JSON.parse(sellerJSON)
+          console.log(seller.firstname)
+          setUser(logger)
+          setAccount(seller.firstname)
+          setinfo(seller)
+        }
+      }
+    }, [])
+  console.log(name)
     const{userdetail, log}=useContext(DataContext)
     const handleClick=(event)=>{
         setOpen(event.currentTarget)
@@ -28,6 +65,8 @@ const Profile =({account,setAccount}) =>{
     }
     const logoutuser=()=>{
         setAccount('');
+        window.localStorage.clear()
+        navigate('/')
     }
 
     const [open,setOpen] =useState(false)
@@ -44,7 +83,7 @@ const Profile =({account,setAccount}) =>{
                 <Logout>Logout</Logout>
                 <PowerSettingsNewIcon color="primary" fontSize="small" />
                 </MenuItem>
-            {log === "user" && userdetail.userdetail.role=="ADMIN"?
+            {user === "user" && info.role=="ADMIN"?
             <MenuItem>
             
            <Link style={{textDecoration:'none' ,color:'inherit'}} to="admin-panel">

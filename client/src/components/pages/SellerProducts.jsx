@@ -8,14 +8,20 @@ const URL="http://localhost:5000";
 
 const SellerProducts = () => {
   const { sellerDetail } = useContext(DataContext);
-//   const products = sellerDetail.products;
   const [products, setProducts] = useState([]);
-  const id = sellerDetail._id;
-  const mail = sellerDetail.email;
+  const sellerJSON=window.localStorage.getItem('loggedSeller');
+  const seller=JSON.parse(sellerJSON)
+  const mail=seller.email
+  console.log(mail)
+  const id=seller._id
+//   const products = sellerDetail.products;
+
+  console.log(mail)
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(URL + `/products/${mail}`);
+        console.log(response.data)
         setProducts(response.data);
         console.log(response.data);
       } catch (error) {

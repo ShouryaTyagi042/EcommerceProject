@@ -1,5 +1,5 @@
 import {Box, Button, Dialog, TextField, Typography, styled} from "@mui/material"
-import { useState,useContext } from "react"
+import { useState,useContext, useEffect } from "react"
 import { authSellerLogin, authSignUp,authlogin, authsellerSignUp} from "../../service/api"
 import { DataContext } from "../../context/DataProvider"
 import {   Link } from 'react-router-dom';
@@ -119,7 +119,57 @@ margin-top:10px;
 font-weigth:580;
 `
 
+
+const getSessionData = () => {
+    const sessionData = localStorage.getItem('sessionData');
+    return sessionData ? JSON.parse(sessionData) : null;
+  };
+  
+  // Custom hook for session management
+  const useSession = () => {
+    const [sessionData, setSessionData] = useState(null);
+  
+    useEffect(() => {
+      const data = getSessionData();
+      if (data) {
+        setSessionData(data);
+      }
+    }, []);
+  
+    const setSession = (data) => {
+      localStorage.setItem('sessionData', JSON.stringify(data));
+      setSessionData(data);
+    };
+  
+    const clearSession = () => {
+      localStorage.removeItem('sessionData');
+      setSessionData(null);
+    };
+  
+    return { sessionData, setSession, clearSession };
+  };
+
 const LoginDialog=({open,setOpen})=>{
+    useEffect(() => {
+        const loggedUserJSON = window.localStorage.getItem('loggedUser')
+        const logged=window.localStorage.getItem('logger')
+        const loggedSellerJSON=window.localStorage.getItem('loggedSeller')
+        const identify=JSON.parse(logged)
+        if (identify=='user') {
+            if(loggedUserJSON){
+          const user = JSON.parse(loggedUserJSON)
+          setAccount(user.firstname)
+            }
+
+        }
+        else{
+            if(loggedSellerJSON)
+            {
+                const seller=JSON.parse(loggedSellerJSON)
+                setAccount(seller.firstname)
+            }
+        }
+      }, [])
     const[proceed,setProceed]=useState(true)
     const[signup,setSignup]=useState(signupInitialValues)
     //to take input from the front to the backend
@@ -159,18 +209,23 @@ const LoginDialog=({open,setOpen})=>{
     }
 
     const signupUser=async()=>{
-        let response= authSignUp(signup)
+        let response= await authSignUp(signup)
         if(!response) return;
         handleClose();
+        console.log(response)
+        window.localStorage.setItem('loggedUser', JSON.stringify(response.data.user))
+        window.localStorage.setItem('logger',JSON.stringify(log))
         setAccount(signup.firstname)
 
 
     }
 
     const signupSeller=async()=>{
-        let response=authsellerSignUp(sellerSignup)
+        let response=await authsellerSignUp(sellerSignup)
         if(!response)return ;
         handleCloseforSeller();
+        window.localStorage.setItem('loggedSeller', JSON.stringify(response.data.seller))
+        window.localStorage.setItem('logger',JSON.stringify(log))
         setAccount(sellerSignup.firstname)
     }
     const onInputChange=(event)=>{
@@ -192,6 +247,8 @@ const LoginDialog=({open,setOpen})=>{
         handleClose();
         setuserDetail({...userdetail,userdetail:response.data.user})
         console.log(userdetail)
+        window.localStorage.setItem('loggedUser', JSON.stringify(response.data.user))
+        window.localStorage.setItem('logger',JSON.stringify(log))
         setAccount(response.data.user.firstname)
        }else{
         setError(true);
@@ -200,13 +257,14 @@ const LoginDialog=({open,setOpen})=>{
     }
     const loginSeller=async()=>{
         let response= await authSellerLogin(sellerLogin)
-        console.log("thi 1" + response)
+        console.log(response)
         if(response.status==200){
             handleCloseforSeller();
             // setsellerDetail({...sellerDetail,sellerDetail:response.data.seller});
             setsellerDetail(response.data.seller);
             const seller = response.data.seller;
-            console.log("thi" + seller.firstname);
+            window.localStorage.setItem('loggedSeller', JSON.stringify(response.data.seller))
+            window.localStorage.setItem('logger',JSON.stringify(log))
          setAccount(response.data.seller.firstname)
          setProceed(false)
         }

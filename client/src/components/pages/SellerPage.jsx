@@ -8,6 +8,15 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const SellerPage = () => {
+  const {account,setAccount,log, sellerDetail,setsellerDetail} = useContext(DataContext);
+
+  useEffect(()=>{
+    const loggedSellerJSON=window.localStorage.getItem('loggedSeller')
+    const seller=JSON.parse(loggedSellerJSON)
+    console.log(seller.firstname)
+    setsellerDetail(seller)
+    setAccount(seller.firstname)
+  },[])
   const navigate = useNavigate();
 
   const handleButtonAllProducts = () => {
@@ -18,12 +27,12 @@ const SellerPage = () => {
     navigate('/addnewproducts');
   }
 
-  const {log, sellerDetail} = useContext(DataContext);
   console.log("This is just a test " + sellerDetail.firstname);
+
   return (
     <div>
       <div className="title">
-        <h1>Welcome {sellerDetail.firstname}</h1>
+        <h1>Welcome {account}</h1>
         
       </div>
 
