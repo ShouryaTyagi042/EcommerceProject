@@ -1,20 +1,25 @@
 import Cart from "../models/cart.js";
+import User from "../models/user.js";
 import Product from "../models/product.js";
 
 export const addToCart = async (req,res) => {
     try 
     {
-        const user = req.body.email;
-        const { productId , quantity} = req.body;
+        const mail = req.params.mail;
+        const productId = req.params.id;
 
-        const cart = await Cart.findOne({ userId: user });
+        console.log("this is the mail " + mail);
+        console.log("this is the product id " + productId);
+
+        const cart = await Cart.findOne({ userId: mail });
+        const user = await User.findOne({ email: mail})
         if (!cart) throw new Error("User not found");
 
-        const product = await Product.findById(productId);
+        const product = await Product.findOne({id : productId});
         console.log(product);
         if (!product) throw new Error("Product was not found");
 
-        cart.cartItems.push({ productId, quantity, name: product.name, price: product.price});
+        cart.cartItems.push({ productId, quantity: 1, name: product.title.shortTitle, price: product.price.mrp});
 
         console.log(cart.cartItems);
         
@@ -34,7 +39,13 @@ export const addToCart = async (req,res) => {
 
     export const getItems = async (req, res) => {
         try {
-            const cart = await Cart.findOne({ userId: req.body.email });
+            const mail = req.params.mail;
+            const cart = await Cart.findOne({ userId: mail });
+            const user = await User.findOne({
+                email: mail,
+            });
+            console.log("This is getItems of cart controller " + user);
+
             const products = cart.cartItems; 
 
             res.status(200).send({ products });
