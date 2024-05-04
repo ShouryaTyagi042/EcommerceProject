@@ -3,6 +3,10 @@ import { addEllipsis } from '../../utils/common-utils'
 import ButtonGroup from './ButtonGroup.jsx'
 import { removeFromCart } from '../../redux/actions/cartActions.js'
 import { useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
+import axios from 'axios';
+
+const URL = "http://localhost:5000/"
 
 const Component = styled(Box)`
     border-top: 1px solid #f0f0f0;
@@ -28,8 +32,29 @@ const Remove = styled(Button)`
     background-color: #edd5d3;
 `
 
-export default function CartItem({item}) {
+export default function CartItem({ productId }) {
 
+    console.log("testing", productId);
+    const [id, setId] = useState();
+    const [data, setData] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
+    useEffect(() => {
+       setId(productId);
+    
+        const fetchProducts = async () => {
+          const response = await axios.get(URL + `product/${productId}`);
+          console.log(response);
+          const dat = await response.data;
+          setData(dat);
+          console.log("this",dat);
+        //   setCartItems(data);
+          setIsLoading(false);
+        }
+    
+        fetchProducts();
+      }, []); 
+
+    // console.log("From cartitemjsx " + item);
     const dispatch = useDispatch();
 
     const removeItemFromCart = (id) => {
@@ -38,31 +63,32 @@ export default function CartItem({item}) {
     }
 
   return (
+    isLoading ? <h1>Loading...</h1> :
     <Component>
         <LeftComponent>
             <img  
             style={{height: 140}}
-            src={item.url}
+            src={data.url}
             alt="product image">
             </img>
             <ButtonGroup />
         </LeftComponent>
         <Box style= {{ margin: 20}}>
             <Typography>
-                {addEllipsis (item.title.longTitle)}
+                {addEllipsis (data.title.longTitle)}
             </Typography>
 
             <SmallText>
-                Sold by <b>{item.seller}</b>
+                Sold by <b>{data.seller}</b>
             </SmallText>
             <Box style={{ padding: '10px', color: '#333' }}>
             <span style={{ fontSize: 18, color: '#007BFF'  }}><b>Price </b></span>
-            <span style={{ fontSize: 20, color: '#878787' }}><b>₹{item.price.cost} </b></span>
-            <span style={{ fontSize: 18, color: '#878787' }}><b><strike>{item.price.mrp} </strike></b></span>
-            <span style={{ color: '#388E3C', fontWeight: 'bold' }}>{item.price.discount} Off</span>
+            <span style={{ fontSize: 20, color: '#878787' }}><b>₹{data.price.cost} </b></span>
+            <span style={{ fontSize: 18, color: '#878787' }}><b><strike>{data.price.mrp} </strike></b></span>
+            <span style={{ color: '#388E3C', fontWeight: 'bold' }}>{data.price.discount} Off</span>
             </Box>
             <Remove onClick={() =>{
-                removeItemFromCart(item.id)
+                removeItemFromCart(data.id)
             }
             }>Remove</Remove>
         </Box>
