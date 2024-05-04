@@ -25,6 +25,7 @@ const cartSchema = new mongoose.Schema({
   userId: {
     type: String,
     required: true,
+    default: "seller1@gmail.com"
   },
   cartItems: {
     type: [cartItemsSchema],

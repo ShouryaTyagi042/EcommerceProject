@@ -37,7 +37,7 @@ export const createUser = async (req, res) => {
     // rather than id, we are using email
     const userId = email;
     console.log(user);
-    createCart(userId);
+    await createCart(userId);
     res.status(201).send({ user });
   } catch (error) {
     res.status(400).json({ error: error.message });
