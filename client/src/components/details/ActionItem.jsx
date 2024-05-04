@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Box, Button, styled } from '@mui/material'
 
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { DataContext } from '../../context/DataProvider';
+import axios from 'axios';
 import { addToCart } from '../../redux/actions/cartActions';
 
 const LeftContainer = styled(Box)(({ theme }) => ({
@@ -29,22 +31,48 @@ const LeftContainer = styled(Box)(({ theme }) => ({
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
+  const {account, setAccount, userDetail, setuserDetail} = useContext(DataContext);
 
   const [quantity, setQuantity] = useState(1)
-
+  const [mail, setMail] = useState('');
   const { id } = product;
 
   const addItemsToCart = () => {
       navigate('/cart');
   }
 
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedUser')
+    const user = JSON.parse(loggedUserJSON)
+
+    if (user) {
+      console.log("this is getting boring :-" + user.email);
+      setuserDetail(user);
+      setAccount(user.firstname);
+      setMail(user.email);
+    }
+  }, [userDetail]);  
+
   return (
     <LeftContainer>
     <Box style={{padding: '30px 20px 15px', border: '1px solid #f0f0f0'}}>
         <Image src={product.url} alt={product.img} />
         <StyledButton variant='contained' style={{marginRight: 10}} 
-        onClick={() =>{
-          dispatch(addToCart(id, quantity))
+        onClick={async () =>{
+          // dispatch(addToCart(id, quantity))
+          try {
+            console.log("Trying to add items for this user " + mail);
+            const response = await axios.post(`http://localhost:5000/add-to-cart/${mail}/${id}`, {
+              // email: userDetail.email,
+              // productName: product.name,/
+            });
+        
+            console.log(response.data);
+          } catch (error) {
+            console.error(error);
+          }
+        
           navigate('/cart');
         }}>
           Add to Cart</StyledButton>
