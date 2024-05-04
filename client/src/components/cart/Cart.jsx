@@ -1,8 +1,11 @@
 import { Typography, Grid, Box,Button, styled } from '@mui/material';
 import React from 'react'
-
+import { useState, useContext, useEffect } from "react"
+import { DataContext } from '../../context/DataProvider';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
+const URL = "http://localhost:5000"
 //components
 import CartItem from './CartItem';
 import TotalBal from './TotalBal';
@@ -27,23 +30,50 @@ const ButtonWrapper = styled(Button)`
 
 export default function Cart() {
 
-    const { cartItems } = useSelector(state => state.cart);
+    const {account, setAccount, userDetail, setuserDetail} = useContext(DataContext);
+    const [isLoading, setIsLoading] = useState(true);
+    // const { cartItems } = useSelector(state => state.cart);
+    const [cartItems, setCartItems] = useState([]);
 
+    useEffect(() => {
+      const loggedUserJSON = window.localStorage.getItem('loggedUser')
+      const user = JSON.parse(loggedUserJSON)
+  
+      if (user) {
+        console.log("this is in the cart page :-" + user.email);
+        setuserDetail(user)
+        setAccount(user.firstname)
+      }
+  
+      const fetchCartItems = async () => {
+        const response = await axios.get(URL + `/get-item/${user.email}`);
+        const data = await response.data;
+        console.log("Items in users cart are",data.products);
+        setCartItems(data);
+        setIsLoading(true);
+      }
+  
+      fetchCartItems();
+    }, [userDetail]);      
+    // console.log(cartItems.products.length);/
   return (
+    // isLoading ? <h1>Loading...</h1> :
     <>
-     {cartItems.length > 0 ? 
+    <div>
+     {cartItems && cartItems.products && cartItems.products.length > 0 ? 
         <Container container mr={2}>
             <Grid item lg={9} md={9} sm={12} xs={12}>
                 <Header>
                     <Typography>
-                        My Cart ({cartItems.length})
+                        My Cart ({cartItems.products.length})
                     </Typography>
                 </Header>
-                {
-                    cartItems.map(item => (
-                        <CartItem item={item} />
-                    ))
-                }
+            {
+            cartItems.products.map(item => {
+                console.log("the items", item);
+                return <CartItem productId={item.productId} />;
+            })
+            }
                 <Box>
                     <ButtonWrapper>
                         Place Order
@@ -52,13 +82,16 @@ export default function Cart() {
             </Grid>
             
             <Grid item pl={2} lg={3} md={3} sm={12} xs={12}>
-                <TotalBal cartItems={cartItems}/>
+                {/* <TotalBal productId={item.productId}/> */}
+                <TotalBal items = {cartItems.products}/>
+
             </Grid>
         
         </Container>
         // : <div>There is Nothing to show here, yet</div>
         : <EmptyCart /> 
      }
+     </div>
     </>
   )
 }
