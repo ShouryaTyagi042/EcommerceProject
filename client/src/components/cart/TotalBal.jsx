@@ -1,21 +1,39 @@
 import { Typography, Box, Paper } from '@mui/material'
 import { useState, useEffect } from 'react'
+import axios from 'axios'
 
-export default function TotalBal( { cartItems }) {
+export default function TotalBal( { items }) {
 
     const [price, setPrice] = useState(0);
     const [delCharge, setDelCharge] = useState(40);
 
     useEffect(() => {
         totalAmt();
-    }, [cartItems])
+    }, [items])
+
+    //incase we were to receive all the product ids one by one, we'll use this
+    // useEffect(() => {
+    //   setId(productId);
+   
+    //    const fetchProducts = async () => {
+    //      const response = await axios.get(URL + `product/${productId}`);
+    //      console.log(response);
+    //      const dat = await response.data;
+    //      setData(dat);
+    //      console.log("this",dat);
+       //   setCartItems(data);
+    //      setIsLoading(false);
+    //    }
+   
+    //    fetchProducts();
+    //  }, []);
 
     // let delCharge = 40;
 
     const totalAmt = () => {
         let total = 0;
-        cartItems.map(item => {
-            total = total + item.price.cost;
+        items.map(item => {
+            total = total + item.price;
         })
         setPrice(total);
         
@@ -31,15 +49,15 @@ export default function TotalBal( { cartItems }) {
       </Box>
       <Box mb={2}>
   <Typography variant="subtitle1" mb={2} sx={{ fontFamily: 'sans-serif' }}>
-    Price ({cartItems?.length} items)
+    Price ({items?.length} items)
     <Box component="span" ml={2}>₹{price}</Box>
   </Typography>
   <Typography variant="subtitle1" mb={2} sx={{ fontFamily: 'sans-serif' }}>
-    Delivery Charges ({cartItems?.length} items)
-    <Box component="span" ml={2}>₹{delCharge}</Box>
+    Delivery Charges ({items?.length} items)
+    <Box component="span" ml={2}>₹{price > 500 ? 0 : 40}</Box>
   </Typography>
   <Typography variant="h5" color="primary" mb={2} sx={{ fontFamily: 'sans-serif' }}>
-    Total Amount ({cartItems?.length} items)
+    Total Amount ({items?.length} items)
     <Box component="span" ml={2}>₹{price + delCharge}</Box>
   </Typography>
   <Typography sx={{ color: 'green', fontWeight: 'lighter', mt: 2, fontFamily: 'sans-serif' }}>
