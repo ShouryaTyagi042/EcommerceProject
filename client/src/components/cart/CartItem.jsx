@@ -87,10 +87,6 @@ export default function CartItem({ productId }) {
             <span style={{ fontSize: 18, color: '#878787' }}><b><strike>{data.price.mrp} </strike></b></span>
             <span style={{ color: '#388E3C', fontWeight: 'bold' }}>{data.price.discount} Off</span>
             </Box>
-            <Remove onClick={() =>{
-                removeItemFromCart(data.id)
-            }
-            }>Remove</Remove>
         </Box>
         
     </Component>
