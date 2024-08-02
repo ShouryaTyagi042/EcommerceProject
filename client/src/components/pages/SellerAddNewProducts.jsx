@@ -3,7 +3,8 @@ import { useContext } from 'react';
 import { DataContext } from '../../context/DataProvider';
 import axios from 'axios';
 import './styles/SellerAddNewProducts.css';
-const URL = 'http://localhost:5000/'
+import { BASE_URL } from '../../constants';
+const URL = BASE_URL
 
 function SellerAddNewProducts() {
   const { sellerDetail } = useContext(DataContext);
@@ -18,7 +19,7 @@ function SellerAddNewProducts() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/add-new-product', {...product, sellerMail: seller.email, id: Math.floor(Math.random() * 10000) });
+      await axios.post(`${BASE_URL}/add-new-product`, {...product, sellerMail: seller.email, id: Math.floor(Math.random() * 10000) });
       alert('Product added successfully');
       setProduct(initialState); // Reset the form
     } catch (error) {

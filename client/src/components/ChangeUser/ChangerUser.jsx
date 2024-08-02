@@ -7,7 +7,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
-const URL="http://localhost:5000";
+import { BASE_URL } from '../../constants';
+const URL=BASE_URL;
 
 
 

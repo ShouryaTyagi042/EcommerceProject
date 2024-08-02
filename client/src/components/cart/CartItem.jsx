@@ -5,8 +5,9 @@ import { removeFromCart } from '../../redux/actions/cartActions.js'
 import { useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import axios from 'axios';
+import { BASE_URL } from '../../constants/index.js'
 
-const URL = "http://localhost:5000/"
+const URL = BASE_URL
 
 const Component = styled(Box)`
     border-top: 1px solid #f0f0f0;
@@ -42,7 +43,7 @@ export default function CartItem({ productId }) {
        setId(productId);
     
         const fetchProducts = async () => {
-          const response = await axios.get(URL + `product/${productId}`);
+          const response = await axios.get(URL + `/product/${productId}`);
           console.log(response);
           const dat = await response.data;
           setData(dat);

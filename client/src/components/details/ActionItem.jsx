@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { DataContext } from '../../context/DataProvider';
 import axios from 'axios';
 import { addToCart } from '../../redux/actions/cartActions';
+import { BASE_URL } from '../../constants';
 
 const LeftContainer = styled(Box)(({ theme }) => ({
   minWidth: '40%',
@@ -63,7 +64,7 @@ const LeftContainer = styled(Box)(({ theme }) => ({
           // dispatch(addToCart(id, quantity))
           try {
             console.log("Trying to add items for this user " + mail);
-            const response = await axios.post(`http://localhost:5000/add-to-cart/${mail}/${id}`, {
+            const response = await axios.post(`${BASE_URL}/add-to-cart/${mail}/${id}`, {
               // email: userDetail.email,
               // productName: product.name,/
             });

@@ -5,7 +5,8 @@ import { Link,useNavigate} from "react-router-dom";
 import { DataContext } from "../../context/DataProvider";
 import axios from 'axios'
 import { SevenK } from "@mui/icons-material";
-const URL="http://localhost:5000";
+import { BASE_URL } from "../../constants";
+const URL=BASE_URL;
 
 
 const ModifiedMenu=styled(Menu)`

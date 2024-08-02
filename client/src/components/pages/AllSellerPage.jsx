@@ -9,8 +9,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import {Paper} from "@mui/material";
 import moment from 'moment'
-
-const URL="http://localhost:5000";
+import { BASE_URL } from "../../constants";
+const URL=BASE_URL;
 
 const ModifiedRow=styled(TableHead)`
 `

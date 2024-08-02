@@ -34,9 +34,7 @@ const Home=()=>{
             <Slide products={products} title="Trending Offers" timer={false}/>
             </Component>
             
-        </Fragment>
-        
+        </Fragment>       
     )
 }
-
 export default Home;

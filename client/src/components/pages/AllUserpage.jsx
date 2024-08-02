@@ -11,7 +11,8 @@ import {Paper} from "@mui/material";
 import moment from 'moment'
 import EditIcon from '@mui/icons-material/Edit';
 import ChangeUser from "../ChangeUser/ChangerUser";
-const URL="http://localhost:5000";
+import { BASE_URL } from "../../constants";
+const URL=BASE_URL;
 
 
 

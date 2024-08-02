@@ -1,8 +1,5 @@
 import { Box,Typography,styled } from "@mui/material";
-
-
 import { navData } from "../../constants/data";
-
 const ModifiedNavBar= styled(Box)(({theme})=>({
 display:'flex',
 margin:'55px 130px 0px 130px',
@@ -17,15 +14,11 @@ const Conatiner=styled(Box)`
 padding:12px 8px;
 text-align:center;
 `
-
 const Text=styled(Typography)`
 font-size:12px;
 font-weight:575;
 font-family: inter_semi_bold, fallback-inter_semi_bold, Arial, sans-serif;
 `
-
-
-
 const NavBar=()=>{
     return (
         <Box style={{ background: '#fff'}}>
@@ -42,5 +35,4 @@ const NavBar=()=>{
         </Box>
         )
 }
-
 export default NavBar;

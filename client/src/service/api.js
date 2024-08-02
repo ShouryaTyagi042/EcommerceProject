@@ -1,6 +1,7 @@
 import axios from "axios";
+import { BASE_URL } from "../constants";
 
-const URL="http://localhost:5000";
+const URL=BASE_URL;
 
 
 export const authSignUp=async(data) =>{

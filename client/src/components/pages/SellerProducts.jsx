@@ -4,7 +4,8 @@ import { DataContext } from '../../context/DataProvider';
 import './styles/SellerProducts.css';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import axios from 'axios';
-const URL="http://localhost:5000";
+import { BASE_URL } from '../../constants';
+const URL=BASE_URL;
 
 const SellerProducts = () => {
   const { sellerDetail } = useContext(DataContext);

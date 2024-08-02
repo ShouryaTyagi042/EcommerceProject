@@ -8,12 +8,8 @@ const Image=styled('img')(({theme})=>({
     height:270,
     [theme.breakpoints.down('md')]:{
       objectFit:'cover',
-      height:100
-    }
-    
+      height:100 }
 }))
-
-
 const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -25,11 +21,7 @@ const responsive = {
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 1
-    }
-  };
-
-
+      items: 1}};
 const Banner=()=>{
     return(
         <Carousel
@@ -38,22 +30,11 @@ const Banner=()=>{
         draggable={false}
         infinite={true}
         autoPlay={true}
-        autoPlaySpeed={4000}
-        keyBoardControl={true}
-        slidesToSlide={1}
-        dotListClass="custom-dot-list-style"
-        itemClass="carousel-item-padding-40-px"
-        containerClass="carousel-container"
-        >
-            
-            {
+        autoPlaySpeed={4000}keyBoardControl={true}
+        slidesToSlide={1}dotListClass="custom-dot-list-style"itemClass="carousel-item-padding-40-px"containerClass="carousel-container"
+        >   {
             bannerData.map(data =>(
-               
-                <Image src={data.url} alt="banner" />
-            ))
-            }
-        </Carousel>
-        )
+                <Image src={data.url} alt="banner" />))}
+        </Carousel> )
 }
-
 export default Banner;

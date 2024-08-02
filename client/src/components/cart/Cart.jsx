@@ -4,8 +4,9 @@ import { useState, useContext, useEffect } from "react"
 import { DataContext } from '../../context/DataProvider';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import { BASE_URL } from '../../constants';
 
-const URL = "http://localhost:5000"
+const URL = BASE_URL
 //components
 import CartItem from './CartItem';
 import TotalBal from './TotalBal';
