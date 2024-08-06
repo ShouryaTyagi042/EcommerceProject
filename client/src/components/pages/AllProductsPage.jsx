@@ -88,10 +88,10 @@ const AllProductsPage=()=>{
               <TableCell align="right">{product.title.longTitle}</TableCell>
               <TableCell align="right">{product.title.shortTitle}</TableCell>
               <TableCell align="right">{product.seller}</TableCell>
-              <TableCell align="right">{product.price.mrp}</TableCell>
-              <TableCell align="right">{product.price.discount}</TableCell>
+              <TableCell align="right">{product.price.cost}0</TableCell>
+              {/* <TableCell align="right">{product.price.discount}</TableCell> */}
 
-              <TableCell align="right">{product.price.cost}</TableCell>
+              <TableCell align="right">{product.price.mrp}</TableCell>
               <TableCell align="right">{moment(product.createdAt).format('LL')}</TableCell>
 
             </TableRow>

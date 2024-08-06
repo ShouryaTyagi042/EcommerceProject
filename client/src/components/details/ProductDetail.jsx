@@ -34,15 +34,15 @@ export default function ProductDetail({ product }) {
   <Box>
     <Box style={{ padding: '10px', color: '#333' }}>
       <span>Marked Price ₹</span>
-      <span><strike>{product.price.mrp}</strike></span>
+      <span><strike>{product.price.cost}0</strike></span>
     </Box>
   </Box>
 </Typography>
   
   <Box style={{ padding: '10px', color: '#333' }}>
     <span style={{ fontSize: 28, color: '#007BFF' }}>Special Price </span>
-    <span style={{ fontSize: 30, color: '#878787' }}><b>₹{product.price.cost} </b></span>
-    <span style={{ color: '#388E3C', fontWeight: 'bold' }}>{product.price.discount} Off</span>
+    <span style={{ fontSize: 30, color: '#878787' }}><b>₹{product.price.mrp} </b></span>
+    <span style={{ color: '#388E3C', fontWeight: 'bold' }}> sale</span>
   </Box>
 
   <Typography style={{ padding: '10px', color: '#333' }}>Available Offers</Typography>
@@ -70,15 +70,15 @@ export default function ProductDetail({ product }) {
         <TableRow>
             <TableCell style={{ color: '#8585ad', fontFamily: 'Monospace' }}>Delivery Charges</TableCell>
             <TableCell>
-                {product.price.cost < 500 
-                    ? `₹ 40. Buy for ₹${500 - product.price.cost} more to get free delivery`
+                {product.price.mrp < 5000 
+                    ? `₹ 40. Buy for ₹${5000 - product.price.mrp} more to get free delivery`
                     : <><strike>₹ 40 </strike> <b>Free delivery for your order</b></>}
             </TableCell>
         </TableRow>
         <TableRow>
             <TableCell style={{ color: '#8585ad', fontFamily: 'Monospace' }}>Warranty</TableCell>
             <TableCell>
-                {product.warranty === "Not mentioned" && product.price.cost > 1300 
+                {product.warranty === "Not mentioned" && product.price.mrp > 1300 
                     ? <b>1 Year warranty</b>
                     : <b>{ product.warranty }</b>}
             </TableCell>

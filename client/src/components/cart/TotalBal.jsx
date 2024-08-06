@@ -61,7 +61,7 @@ export default function TotalBal( { items }) {
     <Box component="span" ml={2}>₹{price + delCharge}</Box>
   </Typography>
   <Typography sx={{ color: 'green', fontWeight: 'lighter', mt: 2, fontFamily: 'sans-serif' }}>
-    Free Delivery on orders above ₹ 500
+    Free Delivery on orders above ₹ 5000
   </Typography>
 </Box>
     </Box>

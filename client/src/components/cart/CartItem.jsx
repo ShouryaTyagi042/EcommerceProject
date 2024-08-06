@@ -84,9 +84,9 @@ export default function CartItem({ productId }) {
             </SmallText>
             <Box style={{ padding: '10px', color: '#333' }}>
             <span style={{ fontSize: 18, color: '#007BFF'  }}><b>Price </b></span>
-            <span style={{ fontSize: 20, color: '#878787' }}><b>₹{data.price.cost} </b></span>
-            <span style={{ fontSize: 18, color: '#878787' }}><b><strike>{data.price.mrp} </strike></b></span>
-            <span style={{ color: '#388E3C', fontWeight: 'bold' }}>{data.price.discount} Off</span>
+            <span style={{ fontSize: 20, color: '#878787' }}><b>₹{data.price.mrp} </b></span>
+            <span style={{ fontSize: 18, color: '#878787' }}><b><strike>{data.price.cost}0 </strike></b></span>
+            {/* <span style={{ color: '#388E3C', fontWeight: 'bold' }}>{data.price.cost} Off</span> */}
             </Box>
         </Box>
         

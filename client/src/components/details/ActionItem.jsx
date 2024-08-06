@@ -77,7 +77,7 @@ const LeftContainer = styled(Box)(({ theme }) => ({
           navigate('/cart');
         }}>
           Add to Cart</StyledButton>
-        <StyledButton variant='contained' style={{background: '#fb541b'}}>Buy Now</StyledButton>
+        <StyledButton variant='contained' style={{background: '#fb541b'}} onClick={() => window.confirm('Paytm gateway not available')}> Buy Now</StyledButton>
     </Box>
     </LeftContainer>
   )
