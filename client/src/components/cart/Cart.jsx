@@ -76,7 +76,7 @@ export default function Cart() {
             })
             }
                 <Box>
-                    <ButtonWrapper>
+                    <ButtonWrapper onClick={() => window.confirm('Paytm gateway not available')}>
                         Place Order
                     </ButtonWrapper>
                 </Box>

@@ -10,14 +10,14 @@ const StyledButton = styled(Button)`
 export default function GroupedButton() {
   return (
    <Component>
-    <StyledButton>
+    {/* <StyledButton>
         -
-    </StyledButton>
+    </StyledButton> */}
 
     <Button disabled> 1 </Button>
 
-    <StyledButton>
-        +
+    <StyledButton onClick={() => alert('The seller only has 1 item')}>
+      +
     </StyledButton>
    </Component>
   )
