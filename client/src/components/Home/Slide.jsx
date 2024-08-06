@@ -73,7 +73,7 @@ const Slide=({ products,title ,timer})=>{
                         <Countdown date={Date.now()+3.6e+7} renderer={renderer}/>
                     </Time>
                 }
-                <ViewButton variant="outlined">View All</ViewButton>
+                {/* <ViewButton variant="outlined">View All</ViewButton> */}
             </Deal>
             <Carousel
                 responsive={responsive}

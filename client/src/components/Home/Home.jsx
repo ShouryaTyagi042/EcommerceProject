@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { useEffect } from "react";
 //Component
 import Banner from "./Banner";
-import NavBar from "./NavBar";
+// import NavBar from "./NavBar";
 import { getProducts } from "../../redux/actions/productAction";
 import{ useDispatch,useSelector} from "react-redux"
 import Slide from "./Slide";
@@ -23,7 +23,7 @@ const Home=()=>{
     return (
         <Fragment>
             {/* It does not create a extra node as in case of div and box */}
-            <NavBar/>
+            {/* <NavBar/> */}
             <Component>
             <Banner/>
             <Slide products={products} title="Exclusive deals for you!" timer={true}/>

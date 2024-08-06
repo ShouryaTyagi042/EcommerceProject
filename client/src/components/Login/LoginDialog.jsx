@@ -295,7 +295,7 @@ const LoginDialog=({open,setOpen})=>{
                             <Text>By continuing you agree to our terms and Privacy Policy</Text>
                             <LoginButton onClick={()=>loginUser()}>Login</LoginButton>
                             <Typography style={{textAlign:"center"}}>OR</Typography>
-                            <RequestOtpButton>Request OTP</RequestOtpButton>
+                            {/* <RequestOtpButton>Request OTP</RequestOtpButton> */}
                             <CreateAccount onClick={()=>openSignup()}>New to our website? Create your free account!</CreateAccount>
                         </RightWrapper>
                     :
@@ -331,7 +331,7 @@ const LoginDialog=({open,setOpen})=>{
                             </Link>
 
                             <Typography style={{textAlign:"center"}}>OR</Typography>
-                            <RequestOtpButton>Request OTP</RequestOtpButton>
+                            {/* <RequestOtpButton>Request OTP</RequestOtpButton> */}
                             <CreateAccount onClick={()=>openSignupforSeller()}>New to our website? Create your free account!</CreateAccount>
                         </RightWrapper>
                     :
