@@ -83,7 +83,7 @@ const Profile =({account,setAccount}) =>{
             <MenuItem onClick={()=>{handleClose();logoutuser();}}>
                 <Logout>Logout</Logout>
                 <PowerSettingsNewIcon color="primary" fontSize="small" />
-                </MenuItem>
+            </MenuItem>
             {user === "user" && info.role=="ADMIN"?
             <MenuItem>
             

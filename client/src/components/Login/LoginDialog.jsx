@@ -304,7 +304,7 @@ const LoginDialog=({open,setOpen})=>{
                             <TextField id="filled-basic" label="Enter Last Name" variant="standard" name="lastname" onChange={()=>onValueChange(event)}/>
                             <TextField id="filled-basic" label="Enter Username" variant="standard" name="username" onChange={()=>onValueChange(event)}/>
                             <TextField id="filled-basic" label="Enter Email" variant="standard" name="email" onChange={()=>onValueChange(event)}/>
-                            <TextField id="filled-basic" label="Enter Password" variant="standard" name="password" onChange={()=>onValueChange(event)}/>
+                            <TextField id="filled-basic" label="Enter Password(min 6 max 30 characters)" variant="standard" name="password" onChange={()=>onValueChange(event)}/>
                             <TextField id="filled-basic" label="Enter Your mobile no." variant="standard" name="phone" onChange={()=>onValueChange(event)}/>
                             <LoginButton onClick={()=>signupUser()}>Continue</LoginButton>
                         </RightWrapper>
@@ -340,7 +340,7 @@ const LoginDialog=({open,setOpen})=>{
                             <TextField id="filled-basic" label="Enter Last Name" variant="standard" name="lastname" onChange={()=>onValueChangeforSeller(event)}/>
                             <TextField id="filled-basic" label="Enter Username" variant="standard" name="username" onChange={()=>onValueChangeforSeller(event)}/>
                             <TextField id="filled-basic" label="Enter Email" variant="standard" name="email" onChange={()=>onValueChangeforSeller(event)}/>
-                            <TextField id="filled-basic" label="Enter Password" variant="standard" name="password" onChange={()=>onValueChangeforSeller(event)}/>
+                            <TextField id="filled-basic" label="Enter Password(min 6 max 30 characters)" variant="standard" name="password" onChange={()=>onValueChangeforSeller(event)}/>
                             <TextField id="filled-basic" label="Enter the name of your company" variant="standard" name="Companyname" onChange={()=>onValueChangeforSeller(event)} />
                             <TextField id="filled-basic" label="Enter GST number of your registered company" variant="standard" name="GST_number" onChange={()=>onValueChangeforSeller(event)} /> 
                             
