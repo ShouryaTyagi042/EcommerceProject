@@ -54,7 +54,7 @@ export default function TotalBal( { items }) {
   </Typography>
   <Typography variant="subtitle1" mb={2} sx={{ fontFamily: 'sans-serif' }}>
     Delivery Charges ({items?.length} items)
-    <Box component="span" ml={2}>₹{price > 500 ? 0 : 40}</Box>
+    <Box component="span" ml={2}>₹{price > 5000 ? 0 : 40}</Box>
   </Typography>
   <Typography variant="h5" color="primary" mb={2} sx={{ fontFamily: 'sans-serif' }}>
     Total Amount ({items?.length} items)
