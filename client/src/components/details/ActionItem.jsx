@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext } from 'react'
-import { Box, Button, styled } from '@mui/material'
+import {React, useState, useEffect, useContext } from 'react'
+import { Dialog,DialogTitle, DialogContent, DialogContentText, DialogActions, Box, Button, styled } from '@mui/material'
 
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -39,6 +39,16 @@ const LeftContainer = styled(Box)(({ theme }) => ({
   const [mail, setMail] = useState('');
   const { id } = product;
 
+  const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
   const addItemsToCart = () => {
       navigate('/cart');
   }
@@ -77,7 +87,28 @@ const LeftContainer = styled(Box)(({ theme }) => ({
           navigate('/cart');
         }}>
           Add to Cart</StyledButton>
-        <StyledButton variant='contained' style={{background: '#fb541b'}} onClick={() => window.confirm('Paytm gateway not available')}> Buy Now</StyledButton>
+          <>
+          <StyledButton variant='contained' style={{background: '#fb541b'}} onClick={handleClickOpen}> 
+                Buy Now
+            </StyledButton>
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>{"Paytm Gateway is down"}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Paytm shutdown their free Payment Gateway service.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    {/* <Button onClick={handleClose} color="primary">
+                        Disagree
+                    </Button> */}
+                    <Button onClick={handleClose} color="primary" autoFocus>
+                        I Understand
+                    </Button>
+                </DialogActions>
+            </Dialog>
+          </>
+        {/* <StyledButton variant='contained' style={{background: '#fb541b'}} onClick={() => window.confirm('Paytm gateway not available')}> Buy Now</StyledButton> */}
     </Box>
     </LeftContainer>
   )
