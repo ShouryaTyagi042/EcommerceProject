@@ -56,7 +56,7 @@ const AllProductsPage=()=>{
         <>
         <ProductHeader>
             <Typography variant="h6">All Products</Typography>
-            <Upload onClick={()=>setopen(true)} variant="contained">Upload products</Upload>
+            {/* <Upload onClick={()=>setopen(true)} variant="contained">Upload products</Upload> */}
         </ProductHeader>
         <UploadProducts 
         open={open}
@@ -71,7 +71,7 @@ const AllProductsPage=()=>{
             <TableCell align="right" style={{fontWeight:'550'}}>caterogy</TableCell>
             <TableCell align="right" style={{fontWeight:'550'}}>seller</TableCell>
             <TableCell align="right"style={{fontWeight:'550'}}>Actual Price</TableCell>
-            <TableCell align="right"style={{fontWeight:'550'}}>Discount</TableCell>
+            {/* <TableCell align="right"style={{fontWeight:'550'}}>Discount</TableCell> */}
             <TableCell align="right"style={{fontWeight:'550'}}>Selling price</TableCell>
             <TableCell align="right"style={{fontWeight:'550'}}>Created At</TableCell>
           </TableRow>
